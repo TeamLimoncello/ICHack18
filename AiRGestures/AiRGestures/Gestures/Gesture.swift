@@ -18,3 +18,22 @@ public enum Gesture: String {
     case fiveFingers = "FIVE"
     case fist = "FIST"
 }
+
+func getEmoji(gesture: Gesture) -> String{
+    switch gesture {
+    case .thumb:
+        return "👍"
+    case .oneFinger:
+        return "☝️"
+    case .twoFingers:
+        return "✌️"
+    case .threeFingers:
+        return "👆👆👆"
+    case .fourFingers:
+        return "✌️✌️"
+    case .fiveFingers:
+        return "🖐"
+    case .fist:
+        return "✊"
+    }
+}

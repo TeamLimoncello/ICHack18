@@ -11,6 +11,8 @@ import AVFoundation
 
 class ViewController: UIViewController {
     
+    @IBOutlet weak var emojiView: UITextView!
+    @IBOutlet weak var cameraView: UIView!
     var session: AVCaptureSession!
     var videoPreviewLayer: AVCaptureVideoPreviewLayer?
     var gestureRecogniser: GestureRecogniser!
@@ -40,7 +42,7 @@ class ViewController: UIViewController {
                 videoPreviewLayer = AVCaptureVideoPreviewLayer(session: session)
                 videoPreviewLayer!.videoGravity = AVLayerVideoGravity.resizeAspect
                 videoPreviewLayer!.connection?.videoOrientation = AVCaptureVideoOrientation.portrait
-                self.view.layer.addSublayer(videoPreviewLayer!)
+                cameraView.layer.addSublayer(videoPreviewLayer!)
                 session!.startRunning()
             }
             videoDeviceOutput = AVCaptureVideoDataOutput()
@@ -54,7 +56,7 @@ class ViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        videoPreviewLayer!.frame = self.view.bounds
+        videoPreviewLayer!.frame = cameraView.bounds
     }
 
 }
@@ -64,6 +66,7 @@ extension ViewController: AVCaptureVideoDataOutputSampleBufferDelegate{
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
         let cvBuffer = CMSampleBufferGetImageBuffer(sampleBuffer)
         gestureRecogniser.detectGestures(in: cvBuffer!)
+        
     }
     
 }
@@ -72,9 +75,14 @@ extension ViewController: AVCaptureVideoDataOutputSampleBufferDelegate{
 extension ViewController: GestureDelegate {
     func didGetError(_ error: Error) {
         print("Error! \(error)")
+        emojiView.text = "💔"
     }
     
     func didGetGesture(_ gesture: Gesture) {
         print("Got gesture \(gesture)")
+        DispatchQueue.main.sync {
+            emojiView.text = getEmoji(gesture: gesture)
+        }
+        
     }
 }
