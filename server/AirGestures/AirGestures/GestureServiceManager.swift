@@ -41,5 +41,4 @@ extension GestureServiceManager: PTManagerDelegate {
         print("Connection: \(connected)")
         print(connected ? "Connected" : "Disconnected")
     }
-    
 }
