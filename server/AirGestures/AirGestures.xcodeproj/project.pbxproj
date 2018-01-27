@@ -8,9 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		4F1AEE12201CBA1E00EFA8D7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F1AEE11201CBA1E00EFA8D7 /* AppDelegate.swift */; };
-		4F1AEE14201CBA1E00EFA8D7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F1AEE13201CBA1E00EFA8D7 /* ViewController.swift */; };
 		4F1AEE16201CBA1E00EFA8D7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4F1AEE15201CBA1E00EFA8D7 /* Assets.xcassets */; };
 		4F1AEE19201CBA1E00EFA8D7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4F1AEE17201CBA1E00EFA8D7 /* Main.storyboard */; };
+		4F686811201D360000339A32 /* PTManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F686810201D360000339A32 /* PTManager.swift */; };
+		4F686815201D36BC00339A32 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F686814201D36BC00339A32 /* Helper.swift */; };
+		4F686823201D388800339A32 /* PTUSBHub.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F68681B201D388700339A32 /* PTUSBHub.m */; };
+		4F686824201D388800339A32 /* PTProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F68681C201D388700339A32 /* PTProtocol.m */; };
+		4F686825201D388800339A32 /* PTChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F686820201D388800339A32 /* PTChannel.m */; };
 		E3816810201CC4B800A6881D /* EventMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E381680F201CC4B800A6881D /* EventMonitor.swift */; };
 		E3816812201CC7DC00A6881D /* GestureServiceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3816811201CC7DC00A6881D /* GestureServiceManager.swift */; };
 		E3D93E5B201CC0E300624FC8 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D93E5A201CC0E300624FC8 /* MenuViewController.swift */; };
@@ -19,11 +23,23 @@
 /* Begin PBXFileReference section */
 		4F1AEE0E201CBA1E00EFA8D7 /* AirGestures.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AirGestures.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F1AEE11201CBA1E00EFA8D7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		4F1AEE13201CBA1E00EFA8D7 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		4F1AEE15201CBA1E00EFA8D7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4F1AEE18201CBA1E00EFA8D7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4F1AEE1A201CBA1E00EFA8D7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4F1AEE1B201CBA1E00EFA8D7 /* AirGestures.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AirGestures.entitlements; sourceTree = "<group>"; };
+		4F686810201D360000339A32 /* PTManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PTManager.swift; sourceTree = "<group>"; };
+		4F686814201D36BC00339A32 /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
+		4F686816201D36EA00339A32 /* AirGestures-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AirGestures-Bridging-Header.h"; sourceTree = "<group>"; };
+		4F686818201D388700339A32 /* PTChannel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PTChannel.h; sourceTree = "<group>"; };
+		4F686819201D388700339A32 /* Peertalk.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Peertalk.h; sourceTree = "<group>"; };
+		4F68681A201D388700339A32 /* PTProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PTProtocol.h; sourceTree = "<group>"; };
+		4F68681B201D388700339A32 /* PTUSBHub.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PTUSBHub.m; sourceTree = "<group>"; };
+		4F68681C201D388700339A32 /* PTProtocol.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PTProtocol.m; sourceTree = "<group>"; };
+		4F68681D201D388700339A32 /* PTUSBHub.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PTUSBHub.h; sourceTree = "<group>"; };
+		4F68681E201D388700339A32 /* LICENSE.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
+		4F68681F201D388700339A32 /* prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = prefix.pch; sourceTree = "<group>"; };
+		4F686820201D388800339A32 /* PTChannel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PTChannel.m; sourceTree = "<group>"; };
+		4F686822201D388800339A32 /* PTPrivate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PTPrivate.h; sourceTree = "<group>"; };
 		E381680F201CC4B800A6881D /* EventMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventMonitor.swift; sourceTree = "<group>"; };
 		E3816811201CC7DC00A6881D /* GestureServiceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GestureServiceManager.swift; sourceTree = "<group>"; };
 		E3D93E5A201CC0E300624FC8 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
@@ -59,17 +75,37 @@
 		4F1AEE10201CBA1E00EFA8D7 /* AirGestures */ = {
 			isa = PBXGroup;
 			children = (
+				4F686826201D389300339A32 /* peertalk */,
 				E3D93E5A201CC0E300624FC8 /* MenuViewController.swift */,
 				4F1AEE11201CBA1E00EFA8D7 /* AppDelegate.swift */,
 				E3816811201CC7DC00A6881D /* GestureServiceManager.swift */,
+				4F686814201D36BC00339A32 /* Helper.swift */,
+				4F686816201D36EA00339A32 /* AirGestures-Bridging-Header.h */,
 				E381680F201CC4B800A6881D /* EventMonitor.swift */,
-				4F1AEE13201CBA1E00EFA8D7 /* ViewController.swift */,
 				4F1AEE15201CBA1E00EFA8D7 /* Assets.xcassets */,
 				4F1AEE17201CBA1E00EFA8D7 /* Main.storyboard */,
 				4F1AEE1A201CBA1E00EFA8D7 /* Info.plist */,
 				4F1AEE1B201CBA1E00EFA8D7 /* AirGestures.entitlements */,
 			);
 			path = AirGestures;
+			sourceTree = "<group>";
+		};
+		4F686826201D389300339A32 /* peertalk */ = {
+			isa = PBXGroup;
+			children = (
+				4F686810201D360000339A32 /* PTManager.swift */,
+				4F68681E201D388700339A32 /* LICENSE.txt */,
+				4F686819201D388700339A32 /* Peertalk.h */,
+				4F68681F201D388700339A32 /* prefix.pch */,
+				4F686818201D388700339A32 /* PTChannel.h */,
+				4F686820201D388800339A32 /* PTChannel.m */,
+				4F686822201D388800339A32 /* PTPrivate.h */,
+				4F68681A201D388700339A32 /* PTProtocol.h */,
+				4F68681C201D388700339A32 /* PTProtocol.m */,
+				4F68681D201D388700339A32 /* PTUSBHub.h */,
+				4F68681B201D388700339A32 /* PTUSBHub.m */,
+			);
+			path = peertalk;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -143,11 +179,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4F1AEE14201CBA1E00EFA8D7 /* ViewController.swift in Sources */,
+				4F686823201D388800339A32 /* PTUSBHub.m in Sources */,
 				E3816812201CC7DC00A6881D /* GestureServiceManager.swift in Sources */,
 				E3D93E5B201CC0E300624FC8 /* MenuViewController.swift in Sources */,
 				4F1AEE12201CBA1E00EFA8D7 /* AppDelegate.swift in Sources */,
+				4F686825201D388800339A32 /* PTChannel.m in Sources */,
+				4F686811201D360000339A32 /* PTManager.swift in Sources */,
+				4F686824201D388800339A32 /* PTProtocol.m in Sources */,
 				E3816810201CC4B800A6881D /* EventMonitor.swift in Sources */,
+				4F686815201D36BC00339A32 /* Helper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -275,14 +315,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = AirGestures/AirGestures.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = 74NQM6XVWF;
+				DEVELOPMENT_TEAM = V5YSHRDD9B;
 				INFOPLIST_FILE = AirGestures/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.limoncello.AirGestures;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/AirGestures/AirGestures-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
@@ -291,14 +331,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = AirGestures/AirGestures.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = 74NQM6XVWF;
+				DEVELOPMENT_TEAM = V5YSHRDD9B;
 				INFOPLIST_FILE = AirGestures/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.limoncello.AirGestures;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/AirGestures/AirGestures-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 			};
 			name = Release;

@@ -6,69 +6,40 @@
 //  Copyright © 2018 Team Limoncello. All rights reserved.
 //
 
-import MultipeerConnectivity
+import Cocoa
 
-class GestureServiceManager : NSObject, MCNearbyServiceAdvertiserDelegate, MCSessionDelegate {
-    
-    var localPeerID : MCPeerID?
-    var session: MCSession?
-    let AirGestureServiceType = "airgestures-link"
+class GestureServiceManager : NSObject {
+    let ptManager = PTManager.instance
     
     override init() {
         super.init()
         
-        localPeerID = MCPeerID(displayName: Host.current().localizedName ?? "\(NSUserName())'s Mac")
-        
-        let serviceAdvertiser = MCNearbyServiceAdvertiser(peer: localPeerID!,
-                                                          discoveryInfo: nil,
-                                                          serviceType: AirGestureServiceType)
-        serviceAdvertiser.delegate = self
-        serviceAdvertiser.startAdvertisingPeer()
+        // Setup the PTManager
+        ptManager.delegate = self
+        ptManager.connect(portNumber: PORT_NUMBER)
+    }
+}
+
+
+extension GestureServiceManager: PTManagerDelegate {
+    
+    func peertalk(shouldAcceptDataOfType type: UInt32) -> Bool {
+        return true
     }
     
-    func advertiser(advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: Data?, invitationHandler: @escaping (Bool, MCSession) -> Void) {
-        session = MCSession(peer: localPeerID!,
-                                securityIdentity: nil,
-                                encryptionPreference: .none)
-        
-        session!.delegate = self
-        
-        invitationHandler(true, session!)
-    }
-    
-    func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) -> () {
-        if state == MCSessionState.connected {
-            let message = "Hello \(peerID.displayName), welcome to the chat!"
-            let messageData = message.data(using: String.Encoding.utf8)!
-            
-            try! session.send(messageData, toPeers: [peerID], with: .reliable)
+    func peertalk(didReceiveData data: Data, ofType type: UInt32) {
+        if type == PTType.number.rawValue {
+            let num = data.convert() as! Int
+            print("Recieved \(num)")
+        } else if type == PTType.image.rawValue {
+            let image = NSImage(data: data)
+            print("Recieved image")
         }
     }
     
-    func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
-        let unarchiver = NSKeyedUnarchiver(forReadingWith: data)
-        unarchiver.requiresSecureCoding = true
-        let object = unarchiver.decodeObject()
-        unarchiver.finishDecoding()
-        print("\(object)")
+    func peertalk(didChangeConnection connected: Bool) {
+        print("Connection: \(connected)")
+        print(connected ? "Connected" : "Disconnected")
     }
     
-    func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {
-//        Shouldn't be recieving stream..
-        print("Receiving stream..")
-    }
-    
-    func session(_ session: MCSession, didStartReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, with progress: Progress) {
-        print("Receiving resource with name \(resourceName)..")
-    }
-    
-    func session(_ session: MCSession, didFinishReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, at localURL: URL?, withError error: Error?) {
-        print("Finished receiving resource with name \(resourceName)..")
-    }
-    
-    func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: Data?, invitationHandler: @escaping (Bool, MCSession?) -> Void) {
-        print("Received invitation from peer: \(peerID)")
-        let allowConnection = true
-        invitationHandler(allowConnection, session)
-    }
 }

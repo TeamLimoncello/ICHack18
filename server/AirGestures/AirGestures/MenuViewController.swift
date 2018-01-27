@@ -12,9 +12,7 @@ class MenuViewController: NSViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do view setup here.
     }
-    
 }
 
 extension MenuViewController {
@@ -24,7 +22,7 @@ extension MenuViewController {
         
         guard let viewController = storyboard.instantiateController(withIdentifier: identifier) as? MenuViewController
         else {
-            fatalError("Cannot find MenuViewController.")
+            fatalError("Cannot find MenuViewController, check storyboard connections")
         }
         return viewController
     }

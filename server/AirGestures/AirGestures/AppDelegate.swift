@@ -27,6 +27,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                 strongSelf.closePopover(sender: event)
             }
         }
+        
+        let _ = GestureServiceManager()
+        print("Initialized Gesture Service manager")
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
