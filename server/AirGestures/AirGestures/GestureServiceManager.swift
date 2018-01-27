@@ -28,10 +28,12 @@ extension GestureServiceManager: PTManagerDelegate {
     
     func peertalk(didReceiveData data: Data, ofType type: UInt32) {
         if type == PTType.number.rawValue {
-            let num = data.convert() as! Int
+            let num = data.convert() as! String
             print("Recieved \(num)")
         } else if type == PTType.image.rawValue {
             print("Recieved image, use NSImage(data: data) to convert it into a NSImage.")
+        } else {
+            print("Recieved data of unknown type")
         }
     }
     
