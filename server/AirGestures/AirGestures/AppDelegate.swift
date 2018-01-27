@@ -16,18 +16,28 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     var eventMonitor: EventMonitor?
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
+        setupMenuBarIcon()
+        setupEventMonitor()
+        startGestureServiceManager()
+    }
+    
+    func setupMenuBarIcon() {
         if let button = statusItem.button {
             button.image = NSImage(named:NSImage.Name("Menu Bar Icon"))
             button.action = #selector(togglePopover(_:))
         }
         popover.contentViewController = MenuViewController.freshController()
-        
+    }
+    
+    func setupEventMonitor() {
         eventMonitor = EventMonitor(mask: [.leftMouseDown, .rightMouseDown]) { [weak self] event in
             if let strongSelf = self, strongSelf.popover.isShown {
                 strongSelf.closePopover(sender: event)
             }
         }
-        
+    }
+    
+    func startGestureServiceManager() {
         let _ = GestureServiceManager()
         print("Initialized Gesture Service manager")
     }
@@ -55,6 +65,5 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         popover.performClose(sender)
         eventMonitor?.stop()
     }
-
 }
 

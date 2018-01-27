@@ -20,7 +20,6 @@ class GestureServiceManager : NSObject {
     }
 }
 
-
 extension GestureServiceManager: PTManagerDelegate {
     
     func peertalk(shouldAcceptDataOfType type: UInt32) -> Bool {
@@ -32,8 +31,7 @@ extension GestureServiceManager: PTManagerDelegate {
             let num = data.convert() as! Int
             print("Recieved \(num)")
         } else if type == PTType.image.rawValue {
-            let image = NSImage(data: data)
-            print("Recieved image")
+            print("Recieved image, use NSImage(data: data) to convert it into a NSImage.")
         }
     }
     
