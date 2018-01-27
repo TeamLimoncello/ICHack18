@@ -10,6 +10,10 @@ import UIKit
 import AVFoundation
 import MultipeerConnectivity
 
+enum PTType: UInt32 {
+    case number = 100
+    case image = 101
+}
 class ViewController: UIViewController {
     
     
@@ -24,6 +28,7 @@ class ViewController: UIViewController {
         gestureRecogniser.delegate = self
         PTManager.instance.delegate = self
         PTManager.instance.connect(portNumber: 4986)
+        print("PT Connected")
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -86,7 +91,7 @@ extension ViewController: GestureDelegate {
         //print("Got gesture \(gesture)")
         DispatchQueue.main.sync {
             emojiView.text = getEmoji(gesture: gesture)
-            PTManager.instance.sendObject(object:gesture.rawValue, type: 1)
+            PTManager.instance.sendObject(object:gesture.rawValue, type: PTType.number.rawValue)
         }
         
     }

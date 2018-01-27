@@ -22,18 +22,23 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" text="🤚" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="syL-NA-gzl">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="🤚" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="syL-NA-gzl">
                                 <rect key="frame" x="0.0" y="656" width="375" height="156"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="156" id="jAN-9h-TS5"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="100"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="syL-NA-gzl" firstAttribute="trailing" secondItem="S9A-ZJ-QFE" secondAttribute="trailing" id="7qr-Qa-uSG"/>
                             <constraint firstItem="vPP-yJ-BbZ" firstAttribute="top" secondItem="Gg7-Ob-jDB" secondAttribute="top" id="M2C-O0-HsO"/>
+                            <constraint firstAttribute="bottom" secondItem="syL-NA-gzl" secondAttribute="bottom" id="Ney-Qp-o3Q"/>
                             <constraint firstItem="vPP-yJ-BbZ" firstAttribute="width" secondItem="Gg7-Ob-jDB" secondAttribute="width" id="lej-DH-wIA"/>
+                            <constraint firstItem="syL-NA-gzl" firstAttribute="leading" secondItem="S9A-ZJ-QFE" secondAttribute="leading" id="mb0-hK-Sm2"/>
                             <constraint firstItem="vPP-yJ-BbZ" firstAttribute="height" secondItem="Gg7-Ob-jDB" secondAttribute="height" id="qNG-vA-9NP"/>
                             <constraint firstItem="vPP-yJ-BbZ" firstAttribute="leading" secondItem="Gg7-Ob-jDB" secondAttribute="leading" id="qO9-h9-DeS"/>
                         </constraints>
