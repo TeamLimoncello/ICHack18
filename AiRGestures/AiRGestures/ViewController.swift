@@ -8,9 +8,12 @@
 
 import UIKit
 import AVFoundation
+import MultipeerConnectivity
 
 class ViewController: UIViewController {
     
+    
+    @IBOutlet weak var spinner: UIActivityIndicatorView!
     @IBOutlet weak var emojiView: UITextView!
     @IBOutlet weak var cameraView: UIView!
     var session: AVCaptureSession!
@@ -20,6 +23,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         gestureRecogniser = GestureRecogniser()
         gestureRecogniser.delegate = self
+        PTManager.instance.delegate = self
+        PTManager.instance.connect(portNumber: 2345)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -56,7 +61,13 @@ class ViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        videoPreviewLayer!.frame = cameraView.bounds
+        spinner.startAnimating()
+        self.videoPreviewLayer!.frame = self.cameraView.bounds
+        let multipeerThread = DispatchQueue(label: "multipeerThread")
+        multipeerThread.async{
+            self.spinner.stopAnimating()
+            self.spinner.isHidden = true
+        }
     }
 
 }
@@ -79,10 +90,26 @@ extension ViewController: GestureDelegate {
     }
     
     func didGetGesture(_ gesture: Gesture) {
-        print("Got gesture \(gesture)")
+        //print("Got gesture \(gesture)")
         DispatchQueue.main.sync {
             emojiView.text = getEmoji(gesture: gesture)
+            PTManager.instance.sendObject(object:gesture.rawValue, type: 1)
         }
         
     }
+}
+
+extension ViewController: PTManagerDelegate {
+    
+    func peertalk(shouldAcceptDataOfType type: UInt32) -> Bool {
+        return true
+    }
+    
+    func peertalk(didReceiveData data: Data, ofType type: UInt32) {
+    }
+    
+    func peertalk(didChangeConnection connected: Bool) {
+    }
+    
+    
 }
