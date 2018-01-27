@@ -12,7 +12,7 @@ class GestureServiceManager : NSObject, MCNearbyServiceAdvertiserDelegate, MCSes
     
     var localPeerID : MCPeerID?
     var session: MCSession?
-    let AirGestureServiceType = "airgestures-link"
+    let AirGestureServiceType = "airgestures"
     
     override init() {
         super.init()
@@ -36,7 +36,9 @@ class GestureServiceManager : NSObject, MCNearbyServiceAdvertiserDelegate, MCSes
         invitationHandler(true, session!)
     }
     
-    func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) -> () {
+    func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
+        print(peerID.displayName)
+        print(state)
         if state == MCSessionState.connected {
             let message = "Hello \(peerID.displayName), welcome to the chat!"
             let messageData = message.data(using: String.Encoding.utf8)!
@@ -50,7 +52,7 @@ class GestureServiceManager : NSObject, MCNearbyServiceAdvertiserDelegate, MCSes
         unarchiver.requiresSecureCoding = true
         let object = unarchiver.decodeObject()
         unarchiver.finishDecoding()
-        print("\(object)")
+        print("\(object ?? "null")")
     }
     
     func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {
