@@ -7,8 +7,10 @@
 //
 
 import Foundation
+import CoreGraphics
 
-protocol GestureDelegate {
+public protocol GestureDelegate {
     func didGetGesture(_ gesture: Gesture)
     func didGetError(_ error: Error)
+    func drawRect(_ rect: CGRect)
 }

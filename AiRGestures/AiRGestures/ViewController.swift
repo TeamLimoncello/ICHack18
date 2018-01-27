@@ -15,12 +15,14 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var emojiView: UITextView!
     @IBOutlet weak var cameraView: UIView!
-    var session: AVCaptureSession!
-    var videoPreviewLayer: AVCaptureVideoPreviewLayer?
+    @IBOutlet weak var imageView: UIImageView!
     var gestureRecogniser: GestureRecogniser!
+    var videoPreviewLayer: AVCaptureVideoPreviewLayer!
+    var vision: Vision!
     
     override func viewDidLoad() {
         gestureRecogniser = GestureRecogniser()
+        vision = Vision()
         gestureRecogniser.delegate = self
         PTManager.instance.delegate = self
         PTManager.instance.connect(portNumber: 4986)
@@ -28,33 +30,31 @@ class ViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
         //Camera Setup
-        session = AVCaptureSession()
-        session!.sessionPreset = AVCaptureSession.Preset.high
-        var defaultVideoDevice : AVCaptureDevice?
-        if let frontCameraDevice = AVCaptureDevice.default(.builtInWideAngleCamera, for: AVMediaType.video, position: .front) {
-            defaultVideoDevice = frontCameraDevice
-        }else{
-            print("What the fuck")
+        let session = AVCaptureSession()
+        session.sessionPreset = AVCaptureSession.Preset.high
+        guard let frontCameraDevice = AVCaptureDevice.default(.builtInWideAngleCamera, for: AVMediaType.video, position: .front) else{
+            print("Front camera not available")
+            return
         }
-        var videoDeviceInput : AVCaptureDeviceInput?
-        var videoDeviceOutput : AVCaptureVideoDataOutput?
+        
         do{
-            videoDeviceInput = try AVCaptureDeviceInput(device: defaultVideoDevice!)
-            if session!.canAddInput(videoDeviceInput!){
-                session!.addInput(videoDeviceInput!)
+            let videoDeviceInput = try AVCaptureDeviceInput(device: frontCameraDevice)
+            if session.canAddInput(videoDeviceInput){
+                session.addInput(videoDeviceInput)
                 videoPreviewLayer = AVCaptureVideoPreviewLayer(session: session)
-                videoPreviewLayer!.videoGravity = AVLayerVideoGravity.resizeAspect
-                videoPreviewLayer!.connection?.videoOrientation = AVCaptureVideoOrientation.portrait
-                cameraView.layer.addSublayer(videoPreviewLayer!)
-                session!.startRunning()
+                videoPreviewLayer.videoGravity = AVLayerVideoGravity.resizeAspect
+                videoPreviewLayer.connection?.videoOrientation = AVCaptureVideoOrientation.portrait
+                //cameraView.layer.addSublayer(videoPreviewLayer)
+                session.startRunning()
             }
-            videoDeviceOutput = AVCaptureVideoDataOutput()
+            let videoDeviceOutput = AVCaptureVideoDataOutput()
             let thread = DispatchQueue(label: "VideoSampleThread")
-            videoDeviceOutput?.setSampleBufferDelegate(self, queue: thread)
-            session!.addOutput(videoDeviceOutput!)
-        } catch let error1{
-            print("Even more what the fuck \(error1)")
+            videoDeviceOutput.setSampleBufferDelegate(self, queue: thread)
+            session.addOutput(videoDeviceOutput)
+        } catch let error{
+            print("Error whilst setting up camera \(error)")
         }
     }
     
@@ -65,16 +65,21 @@ class ViewController: UIViewController {
 
 }
 
-extension ViewController: AVCaptureVideoDataOutputSampleBufferDelegate{
-    
+extension ViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
-        let cvBuffer = CMSampleBufferGetImageBuffer(sampleBuffer)
-        gestureRecogniser.detectGestures(in: cvBuffer!)
+        if vision.requiresRefresh() {
+            vision.setBackgroundImage(sampleBuffer)
+        }
         
+        
+        gestureRecogniser.detectGestures(in: sampleBuffer)
+        let result = vision.calculateResultingBuffer(from: sampleBuffer)
+        let uiImage = UIImage(cgImage: result)
+        DispatchQueue.main.sync {
+            imageView.image = uiImage
+        }
     }
-    
 }
-
 
 extension ViewController: GestureDelegate {
     func didGetError(_ error: Error) {
@@ -83,12 +88,19 @@ extension ViewController: GestureDelegate {
     }
     
     func didGetGesture(_ gesture: Gesture) {
-        //print("Got gesture \(gesture)")
         DispatchQueue.main.sync {
             emojiView.text = getEmoji(gesture: gesture)
             PTManager.instance.sendObject(object:gesture.rawValue, type: 1)
         }
-        
+    }
+    
+    func drawRect(_ rect: CGRect) {
+        DispatchQueue.main.sync {
+            let rView = UIView(frame: rect)
+            rView.layer.borderColor = UIColor.red.cgColor
+            rView.layer.borderWidth = 0.8
+            view.addSubview(rView)
+        }
     }
 }
 

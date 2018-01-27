@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -20,15 +21,28 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vPP-yJ-BbZ">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                                <subviews>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" text="🤚" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="syL-NA-gzl">
+                                        <rect key="frame" x="0.0" y="727" width="375" height="85"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="50"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Vlr-Hx-gs2">
+                                        <rect key="frame" x="0.0" y="52" width="375" height="666.66666666666663"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="Vlr-Hx-gs2" secondAttribute="height" multiplier="9:16" id="ad9-yt-dcb"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="Vlr-Hx-gs2" firstAttribute="top" secondItem="vPP-yJ-BbZ" secondAttribute="top" constant="52" id="13S-Jl-m60"/>
+                                    <constraint firstItem="Vlr-Hx-gs2" firstAttribute="width" secondItem="vPP-yJ-BbZ" secondAttribute="width" id="2kG-pt-HVq"/>
+                                    <constraint firstItem="Vlr-Hx-gs2" firstAttribute="leading" secondItem="vPP-yJ-BbZ" secondAttribute="leading" id="MNp-VK-CZg"/>
+                                </constraints>
                             </view>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" text="🤚" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="syL-NA-gzl">
-                                <rect key="frame" x="0.0" y="656" width="375" height="156"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="100"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -37,11 +51,12 @@
                             <constraint firstItem="vPP-yJ-BbZ" firstAttribute="height" secondItem="Gg7-Ob-jDB" secondAttribute="height" id="qNG-vA-9NP"/>
                             <constraint firstItem="vPP-yJ-BbZ" firstAttribute="leading" secondItem="Gg7-Ob-jDB" secondAttribute="leading" id="qO9-h9-DeS"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="S9A-ZJ-QFE"/>
+                        <viewLayoutGuide key="safeArea" id="Uvy-ZL-FMg"/>
                     </view>
                     <connections>
                         <outlet property="cameraView" destination="vPP-yJ-BbZ" id="tk8-7d-R94"/>
                         <outlet property="emojiView" destination="syL-NA-gzl" id="Dbu-jq-2K8"/>
+                        <outlet property="imageView" destination="Vlr-Hx-gs2" id="BU8-vc-wmy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
