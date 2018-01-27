@@ -13,6 +13,11 @@ class ViewController: UIViewController {
     
     var session: AVCaptureSession!
     var videoPreviewLayer: AVCaptureVideoPreviewLayer?
+    var gestureRecogniser: GestureRecogniser!
+    
+    override func viewDidLoad() {
+        gestureRecogniser = GestureRecogniser()
+    }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -26,6 +31,7 @@ class ViewController: UIViewController {
             print("What the fuck")
         }
         var videoDeviceInput : AVCaptureDeviceInput?
+        var videoDeviceOutput : AVCaptureVideoDataOutput?
         do{
             videoDeviceInput = try AVCaptureDeviceInput(device: defaultVideoDevice!)
             if session!.canAddInput(videoDeviceInput!){
@@ -36,6 +42,10 @@ class ViewController: UIViewController {
                 self.view.layer.addSublayer(videoPreviewLayer!)
                 session!.startRunning()
             }
+            videoDeviceOutput = AVCaptureVideoDataOutput()
+            let thread = DispatchQueue(label: "VideoSampleThread")
+            videoDeviceOutput?.setSampleBufferDelegate(self, queue: thread)
+            session!.addOutput(videoDeviceOutput!)
         } catch let error1{
             print("Even more what the fuck \(error1)")
         }
@@ -48,3 +58,10 @@ class ViewController: UIViewController {
 
 }
 
+extension ViewController: AVCaptureVideoDataOutputSampleBufferDelegate{
+    
+    func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
+        let cvBuffer = CMSampleBufferGetImageBuffer(sampleBuffer)
+        gestureRecogniser.detectGestures(in: cvBuffer!)
+    }
+}

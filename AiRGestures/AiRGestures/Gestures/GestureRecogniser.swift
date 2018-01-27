@@ -18,6 +18,7 @@ public class GestureRecogniser {
     }
     
     public func detectGestures(in image: CVPixelBuffer) -> Gesture? {
+        print("here")
         do {
             let prediction = try model.prediction(data: image)
             print(prediction.classLabel)
