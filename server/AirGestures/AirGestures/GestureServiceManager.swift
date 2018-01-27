@@ -11,6 +11,7 @@ import MultipeerConnectivity
 class GestureServiceManager : NSObject, MCNearbyServiceAdvertiserDelegate, MCSessionDelegate {
     
     var localPeerID : MCPeerID?
+    var session: MCSession?
     let AirGestureServiceType = "airgestures-link"
     
     override init() {
@@ -26,13 +27,13 @@ class GestureServiceManager : NSObject, MCNearbyServiceAdvertiserDelegate, MCSes
     }
     
     func advertiser(advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: Data?, invitationHandler: @escaping (Bool, MCSession) -> Void) {
-        let session = MCSession(peer: localPeerID!,
+        session = MCSession(peer: localPeerID!,
                                 securityIdentity: nil,
                                 encryptionPreference: .none)
         
-        session.delegate = self
+        session!.delegate = self
         
-        invitationHandler(true, session)
+        invitationHandler(true, session!)
     }
     
     func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) -> () {
@@ -45,22 +46,29 @@ class GestureServiceManager : NSObject, MCNearbyServiceAdvertiserDelegate, MCSes
     }
     
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
-        print(String(data: data, encoding: String.Encoding.utf8) ?? "<bad data>")
+        let unarchiver = NSKeyedUnarchiver(forReadingWith: data)
+        unarchiver.requiresSecureCoding = true
+        let object = unarchiver.decodeObject()
+        unarchiver.finishDecoding()
+        print("\(object)")
     }
     
     func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {
-//        <#code#>
+//        Shouldn't be recieving stream..
+        print("Receiving stream..")
     }
     
     func session(_ session: MCSession, didStartReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, with progress: Progress) {
-//        <#code#>
+        print("Receiving resource with name \(resourceName)..")
     }
     
     func session(_ session: MCSession, didFinishReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, at localURL: URL?, withError error: Error?) {
-//        <#code#>
+        print("Finished receiving resource with name \(resourceName)..")
     }
     
     func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: Data?, invitationHandler: @escaping (Bool, MCSession?) -> Void) {
-//        <#code#>
+        print("Received invitation from peer: \(peerID)")
+        let allowConnection = true
+        invitationHandler(allowConnection, session)
     }
 }
