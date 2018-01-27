@@ -9,12 +9,12 @@
 import Foundation
 
 
-public enum Gesture {
-    case thumb
-    case oneFinger
-    case twoFingers
-    case threeFingers
-    case fourFingers
-    case fiveFingers
-    case fist
+public enum Gesture: String {
+    case thumb = "THUMB"
+    case oneFinger = "ONE"
+    case twoFingers = "TWO"
+    case threeFingers = "THREE"
+    case fourFingers = "FOUR"
+    case fiveFingers = "FIVE"
+    case fist = "FIST"
 }

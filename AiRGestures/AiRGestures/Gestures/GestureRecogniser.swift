@@ -6,25 +6,39 @@
 //  Copyright © 2018 Lewis Bell. All rights reserved.
 //
 
-import Foundation
-import CoreImage
+import Vision
+import CoreML
 
 public class GestureRecogniser {
-    var model: GestureModel
     
+    var delegate: GestureDelegate?
     
-    init(){
-        self.model = GestureModel()
+    public func detectGestures(in image: CVPixelBuffer) {
+        do {
+            let model = try VNCoreMLModel(for: GestureModel().model)
+            let request = VNCoreMLRequest(model: model, completionHandler: didGetResults)
+            let handler = VNImageRequestHandler(cvPixelBuffer: image, options: [:])
+            try handler.perform([request])
+        } catch let error {
+            delegate?.didGetError(error)
+        }
     }
     
-    public func detectGestures(in image: CVPixelBuffer) -> Gesture? {
-        print("here")
-        do {
-            let prediction = try model.prediction(data: image)
-            print(prediction.classLabel)
-        } catch let error {
-            print(error)
+    func didGetResults(request: VNRequest, error: Error?) {
+        guard error == nil else {
+            delegate?.didGetError(error!)
+            return
         }
-        return nil
+        
+        guard let results = request.results as? [VNClassificationObservation] else {
+            print("What")
+            return
+        }
+        let probableObservation = results.sorted { (observationA, observationB) -> Bool in
+            return observationA.confidence > observationB.confidence
+        }.first!
+        
+        delegate?.didGetGesture(Gesture(rawValue: probableObservation.identifier)!)
+        
     }
 }

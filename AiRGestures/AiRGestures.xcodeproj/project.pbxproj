@@ -12,6 +12,7 @@
 		47545119201C8FB0008B2CA8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 47545117201C8FB0008B2CA8 /* Main.storyboard */; };
 		4754511B201C8FB0008B2CA8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4754511A201C8FB0008B2CA8 /* Assets.xcassets */; };
 		4754511E201C8FB0008B2CA8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4754511C201C8FB0008B2CA8 /* LaunchScreen.storyboard */; };
+		6933C676201CC5DA003522B3 /* GestureDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6933C675201CC5DA003522B3 /* GestureDelegate.swift */; };
 		698D7024201CB5F300182211 /* GestureModel.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 698D7023201CB5F300182211 /* GestureModel.mlmodel */; };
 		698D7026201CB67A00182211 /* GestureRecogniser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698D7025201CB67A00182211 /* GestureRecogniser.swift */; };
 		698D7028201CB7FF00182211 /* Gesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698D7027201CB7FF00182211 /* Gesture.swift */; };
@@ -25,6 +26,7 @@
 		4754511A201C8FB0008B2CA8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4754511D201C8FB0008B2CA8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4754511F201C8FB0008B2CA8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6933C675201CC5DA003522B3 /* GestureDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GestureDelegate.swift; sourceTree = "<group>"; };
 		698D7023201CB5F300182211 /* GestureModel.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = GestureModel.mlmodel; sourceTree = "<group>"; };
 		698D7025201CB67A00182211 /* GestureRecogniser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GestureRecogniser.swift; sourceTree = "<group>"; };
 		698D7027201CB7FF00182211 /* Gesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gesture.swift; sourceTree = "<group>"; };
@@ -77,6 +79,7 @@
 				698D7023201CB5F300182211 /* GestureModel.mlmodel */,
 				698D7025201CB67A00182211 /* GestureRecogniser.swift */,
 				698D7027201CB7FF00182211 /* Gesture.swift */,
+				6933C675201CC5DA003522B3 /* GestureDelegate.swift */,
 			);
 			path = Gestures;
 			sourceTree = "<group>";
@@ -153,6 +156,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6933C676201CC5DA003522B3 /* GestureDelegate.swift in Sources */,
 				47545116201C8FB0008B2CA8 /* ViewController.swift in Sources */,
 				47545114201C8FB0008B2CA8 /* AppDelegate.swift in Sources */,
 				698D7028201CB7FF00182211 /* Gesture.swift in Sources */,
@@ -295,7 +299,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = F6DNZ4X96B;
+				DEVELOPMENT_TEAM = 95HMAHL2SN;
 				INFOPLIST_FILE = AiRGestures/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.limoncello.AiRGestures;
@@ -310,7 +314,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = F6DNZ4X96B;
+				DEVELOPMENT_TEAM = 95HMAHL2SN;
 				INFOPLIST_FILE = AiRGestures/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.limoncello.AiRGestures;

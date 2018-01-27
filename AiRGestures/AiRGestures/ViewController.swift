@@ -17,6 +17,7 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         gestureRecogniser = GestureRecogniser()
+        gestureRecogniser.delegate = self
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -63,5 +64,17 @@ extension ViewController: AVCaptureVideoDataOutputSampleBufferDelegate{
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
         let cvBuffer = CMSampleBufferGetImageBuffer(sampleBuffer)
         gestureRecogniser.detectGestures(in: cvBuffer!)
+    }
+    
+}
+
+
+extension ViewController: GestureDelegate {
+    func didGetError(_ error: Error) {
+        print("Error! \(error)")
+    }
+    
+    func didGetGesture(_ gesture: Gesture) {
+        print("Got gesture \(gesture)")
     }
 }
