@@ -8,6 +8,7 @@
 
 import Foundation
 
+
 // MARK: - Delegate
 protocol PTManagerDelegate {
     
@@ -23,7 +24,7 @@ protocol PTManagerDelegate {
 }
 
 #if os(iOS)
-// MARK: - iOS
+    // MARK: - iOS
     
     class PTManager: NSObject {
         
@@ -75,7 +76,7 @@ protocol PTManagerDelegate {
             serverChannel = nil
         }
         
-        /** Sends data to the connected device 
+        /** Sends data to the connected device
          * Uses NSKeyedArchiver to convert the object to data
          */
         func sendObject(object: Any, type: UInt32, completion: ((_ success: Bool) -> Void)? = nil) {
@@ -136,7 +137,7 @@ protocol PTManagerDelegate {
         }
         
         func ioFrameChannel(_ channel: PTChannel!, didEndWithError error: Error?) {
-            printDebug("ERROR (Connection ended): \(error?.localizedDescription)")
+            printDebug("ERROR (Connection ended): \(error!.localizedDescription)")
             peerChannel = nil
             serverChannel = nil
             delegate?.peertalk(didChangeConnection: false)
@@ -166,7 +167,7 @@ protocol PTManagerDelegate {
     
     
 #elseif os(OSX)
-// MARK: - OS X
+    // MARK: - OS X
     
     class PTManager: NSObject {
         
@@ -274,167 +275,167 @@ protocol PTManagerDelegate {
         }
     }
     
-        
-        
-        
-        
-        
-        // MARK: - Channel Delegate
-        extension PTManager: PTChannelDelegate {
-            
-            // Decide whether or not to accept the frame
-            func ioFrameChannel(_ channel: PTChannel!, shouldAcceptFrameOfType type: UInt32, tag: UInt32, payloadSize: UInt32) -> Bool {
-                return delegate!.peertalk(shouldAcceptDataOfType: type)
-            }
-            
-            // Receive the frame data
-            func ioFrameChannel(_ channel: PTChannel, didReceiveFrameOfType type: UInt32, tag: UInt32, payload: PTData) {
-                // Creates the data
-                let dispatchData = payload.dispatchData as DispatchData
-                let data = NSData(contentsOfDispatchData: dispatchData as __DispatchData) as Data
-                delegate?.peertalk(didReceiveData: data, ofType: type)
-            }
-            
-            // Connection was ended
-            func ioFrameChannel(_ channel: PTChannel!, didEndWithError error: Error!) {
-                
-                // Check that the disconnected device is the current device
-                if connectedDeviceID != nil && connectedDeviceID!.isEqual(to: channel.userInfo) {
-                    self.didDisconnect(fromDevice: connectedDeviceID!)
-                }
-                
-                // Check that the disconnected channel is the current one
-                if connectedChannel == channel {
-                    printDebug("Disconnected from \(channel.userInfo)")
-                    self.connectedChannel = nil
-                }
-                
-            }
-            
-        }
     
+    
+    
+    
+    
+    // MARK: - Channel Delegate
+    extension PTManager: PTChannelDelegate {
         
+        // Decide whether or not to accept the frame
+        func ioFrameChannel(_ channel: PTChannel!, shouldAcceptFrameOfType type: UInt32, tag: UInt32, payloadSize: UInt32) -> Bool {
+            return delegate!.peertalk(shouldAcceptDataOfType: type)
+        }
         
-        // MARK: - Helper methods
-        extension PTManager {
+        // Receive the frame data
+        func ioFrameChannel(_ channel: PTChannel, didReceiveFrameOfType type: UInt32, tag: UInt32, payload: PTData) {
+            // Creates the data
+            let dispatchData = payload.dispatchData as DispatchData
+            let data = NSData(contentsOfDispatchData: dispatchData as __DispatchData) as Data
+            delegate?.peertalk(didReceiveData: data, ofType: type)
+        }
+        
+        // Connection was ended
+        func ioFrameChannel(_ channel: PTChannel!, didEndWithError error: Error!) {
             
-            fileprivate func startListeningForDevices() {
-                
-                // Grab the notification center instance
-                let nc = NotificationCenter.default
-                
-                // Add an observer for when the device attaches
-                nc.addObserver(forName: NSNotification.Name.PTUSBDeviceDidAttach, object: PTUSBHub.shared(), queue: nil) { (note) in
-                    
-                    // Grab the device ID from the user info
-                    let deviceID = note.userInfo!["DeviceID"] as! NSNumber
-                    self.printDebug("Attached to device: \(deviceID)")
-                    
-                    // Update our properties on our thread
-                    self.notConnectedQueue.async(execute: {() -> Void in
-                        if self.connectingToDeviceID == nil || !deviceID.isEqual(to: self.connectingToDeviceID) {
-                            self.disconnect()
-                            self.connectingToDeviceID = deviceID
-                            self.connectedDeviceProperties = (note.userInfo?["Properties"] as? NSDictionary)
-                            self.enqueueConnectToUSBDevice()
-                        }
-                    })
-                }
-                
-                // Add an observer for when the device detaches
-                nc.addObserver(forName: NSNotification.Name.PTUSBDeviceDidDetach, object: PTUSBHub.shared(), queue: nil) { (note) in
-                    
-                    // Grab the device ID from the user info
-                    let deviceID = note.userInfo!["DeviceID"] as! NSNumber
-                    self.printDebug("Detached from device: \(deviceID)")
-                    
-                    // Update our properties on our thread
-                    if self.connectingToDeviceID!.isEqual(to: deviceID) {
-                        self.connectedDeviceProperties = nil
-                        self.connectingToDeviceID = nil
-                        if self.connectedChannel != nil {
-                            self.connectedChannel?.close()
-                        }
-                    }
-                    
-                }
-                
+            // Check that the disconnected device is the current device
+            if connectedDeviceID != nil && connectedDeviceID!.isEqual(to: channel.userInfo) {
+                self.didDisconnect(fromDevice: connectedDeviceID!)
             }
             
-            // Runs when the device disconnects
-            fileprivate func didDisconnect(fromDevice deviceID: NSNumber) {
-                printDebug("Disconnected from device")
-                delegate?.peertalk(didChangeConnection: false)
-                
-                // Notify the class that the device has changed
-                if connectedDeviceID!.isEqual(to: deviceID) {
-                    self.willChangeValue(forKey: "connectedDeviceID")
-                    connectedDeviceID = nil
-                    self.didChangeValue(forKey: "connectedDeviceID")
-                }
-            }
-            
-            @objc fileprivate func enqueueConnectToLocalIPv4Port() {
-                notConnectedQueue.async(execute: {() -> Void in
-                    DispatchQueue.main.async(execute: {() -> Void in
-                        self.connectToLocalIPv4Port()
-                    })
-                })
-            }
-            
-            fileprivate func connectToLocalIPv4Port() {
-                let channel = PTChannel(delegate: self)
-                channel?.userInfo = "127.0.0.1:\(portNumber)"
-                
-                channel?.connect(toPort: in_port_t(portNumber!), iPv4Address: INADDR_LOOPBACK, callback: { (error, address) in
-                    if error == nil {
-                        // Update to new channel
-                        self.disconnect()
-                        self.connectedChannel = channel
-                        channel?.userInfo = address!
-                    } else {
-                        self.printDebug(error!.localizedDescription)
-                    }
-                    
-                    self.perform(#selector(self.enqueueConnectToLocalIPv4Port), with: nil, afterDelay: self.reconnectDelay)
-                })
-            }
-            
-            @objc fileprivate func enqueueConnectToUSBDevice() {
-                notConnectedQueue.async(execute: {() -> Void in
-                    DispatchQueue.main.async(execute: {() -> Void in
-                        self.connectToUSBDevice()
-                    })
-                })
-            }
-            
-            fileprivate func connectToUSBDevice() {
-                
-                // Create the new channel
-                let channel = PTChannel(delegate: self)
-                channel?.userInfo = connectingToDeviceID
-                channel?.delegate = self
-                
-                // Connect to the device
-                channel?.connect(toPort: Int32(portNumber!), overUSBHub: PTUSBHub.shared(), deviceID: connectingToDeviceID, callback: { (error) in
-                    if error != nil {
-                        self.printDebug(error!.localizedDescription)
-                        // Reconnet to the device
-                        if (channel?.userInfo != nil && (channel?.userInfo as! NSNumber).isEqual(to: self.connectingToDeviceID)) {
-                            self.perform(#selector(self.enqueueConnectToUSBDevice), with: nil, afterDelay: self.reconnectDelay)
-                        }
-                    } else {
-                        // Update connected device properties
-                        self.connectedDeviceID = self.connectingToDeviceID
-                        self.connectedChannel = channel
-                        self.delegate?.peertalk(didChangeConnection: true)
-                        // Check the device properties
-                        self.printDebug("\(self.connectedDeviceProperties!)")
-                    }
-                })
+            // Check that the disconnected channel is the current one
+            if connectedChannel == channel {
+                printDebug("Disconnected from \(channel.userInfo)")
+                self.connectedChannel = nil
             }
             
         }
+        
+    }
+    
+    
+    
+    // MARK: - Helper methods
+    extension PTManager {
+        
+        fileprivate func startListeningForDevices() {
+            
+            // Grab the notification center instance
+            let nc = NotificationCenter.default
+            
+            // Add an observer for when the device attaches
+            nc.addObserver(forName: NSNotification.Name.PTUSBDeviceDidAttach, object: PTUSBHub.shared(), queue: nil) { (note) in
+                
+                // Grab the device ID from the user info
+                let deviceID = note.userInfo!["DeviceID"] as! NSNumber
+                self.printDebug("Attached to device: \(deviceID)")
+                
+                // Update our properties on our thread
+                self.notConnectedQueue.async(execute: {() -> Void in
+                    if self.connectingToDeviceID == nil || !deviceID.isEqual(to: self.connectingToDeviceID) {
+                        self.disconnect()
+                        self.connectingToDeviceID = deviceID
+                        self.connectedDeviceProperties = (note.userInfo?["Properties"] as? NSDictionary)
+                        self.enqueueConnectToUSBDevice()
+                    }
+                })
+            }
+            
+            // Add an observer for when the device detaches
+            nc.addObserver(forName: NSNotification.Name.PTUSBDeviceDidDetach, object: PTUSBHub.shared(), queue: nil) { (note) in
+                
+                // Grab the device ID from the user info
+                let deviceID = note.userInfo!["DeviceID"] as! NSNumber
+                self.printDebug("Detached from device: \(deviceID)")
+                
+                // Update our properties on our thread
+                if self.connectingToDeviceID!.isEqual(to: deviceID) {
+                    self.connectedDeviceProperties = nil
+                    self.connectingToDeviceID = nil
+                    if self.connectedChannel != nil {
+                        self.connectedChannel?.close()
+                    }
+                }
+                
+            }
+            
+        }
+        
+        // Runs when the device disconnects
+        fileprivate func didDisconnect(fromDevice deviceID: NSNumber) {
+            printDebug("Disconnected from device")
+            delegate?.peertalk(didChangeConnection: false)
+            
+            // Notify the class that the device has changed
+            if connectedDeviceID!.isEqual(to: deviceID) {
+                self.willChangeValue(forKey: "connectedDeviceID")
+                connectedDeviceID = nil
+                self.didChangeValue(forKey: "connectedDeviceID")
+            }
+        }
+        
+        @objc fileprivate func enqueueConnectToLocalIPv4Port() {
+            notConnectedQueue.async(execute: {() -> Void in
+                DispatchQueue.main.async(execute: {() -> Void in
+                    self.connectToLocalIPv4Port()
+                })
+            })
+        }
+        
+        fileprivate func connectToLocalIPv4Port() {
+            let channel = PTChannel(delegate: self)
+            channel?.userInfo = "127.0.0.1:\(portNumber)"
+            
+            channel?.connect(toPort: in_port_t(portNumber!), iPv4Address: INADDR_LOOPBACK, callback: { (error, address) in
+                if error == nil {
+                    // Update to new channel
+                    self.disconnect()
+                    self.connectedChannel = channel
+                    channel?.userInfo = address!
+                } else {
+                    self.printDebug(error!.localizedDescription)
+                }
+                
+                self.perform(#selector(self.enqueueConnectToLocalIPv4Port), with: nil, afterDelay: self.reconnectDelay)
+            })
+        }
+        
+        @objc fileprivate func enqueueConnectToUSBDevice() {
+            notConnectedQueue.async(execute: {() -> Void in
+                DispatchQueue.main.async(execute: {() -> Void in
+                    self.connectToUSBDevice()
+                })
+            })
+        }
+        
+        fileprivate func connectToUSBDevice() {
+            
+            // Create the new channel
+            let channel = PTChannel(delegate: self)
+            channel?.userInfo = connectingToDeviceID
+            channel?.delegate = self
+            
+            // Connect to the device
+            channel?.connect(toPort: Int32(portNumber!), overUSBHub: PTUSBHub.shared(), deviceID: connectingToDeviceID, callback: { (error) in
+                if error != nil {
+                    self.printDebug(error!.localizedDescription)
+                    // Reconnet to the device
+                    if (channel?.userInfo != nil && (channel?.userInfo as! NSNumber).isEqual(to: self.connectingToDeviceID)) {
+                        self.perform(#selector(self.enqueueConnectToUSBDevice), with: nil, afterDelay: self.reconnectDelay)
+                    }
+                } else {
+                    // Update connected device properties
+                    self.connectedDeviceID = self.connectingToDeviceID
+                    self.connectedChannel = channel
+                    self.delegate?.peertalk(didChangeConnection: true)
+                    // Check the device properties
+                    self.printDebug("\(self.connectedDeviceProperties!)")
+                }
+            })
+        }
+        
+    }
     
     
 #endif
@@ -457,7 +458,6 @@ extension Data {
     }
     
 }
-
 
 
 

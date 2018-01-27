@@ -13,7 +13,6 @@ import MultipeerConnectivity
 class ViewController: UIViewController {
     
     
-    @IBOutlet weak var spinner: UIActivityIndicatorView!
     @IBOutlet weak var emojiView: UITextView!
     @IBOutlet weak var cameraView: UIView!
     var session: AVCaptureSession!
@@ -24,7 +23,7 @@ class ViewController: UIViewController {
         gestureRecogniser = GestureRecogniser()
         gestureRecogniser.delegate = self
         PTManager.instance.delegate = self
-        PTManager.instance.connect(portNumber: 2345)
+        PTManager.instance.connect(portNumber: 4986)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -61,13 +60,7 @@ class ViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        spinner.startAnimating()
         self.videoPreviewLayer!.frame = self.cameraView.bounds
-        let multipeerThread = DispatchQueue(label: "multipeerThread")
-        multipeerThread.async{
-            self.spinner.stopAnimating()
-            self.spinner.isHidden = true
-        }
     }
 
 }

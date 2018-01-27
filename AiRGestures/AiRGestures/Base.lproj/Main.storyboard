@@ -20,12 +20,6 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vPP-yJ-BbZ">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
-                                <subviews>
-                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="qHp-3d-XgT">
-                                        <rect key="frame" x="177" y="396" width="20" height="20"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    </activityIndicatorView>
-                                </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" text="🤚" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="syL-NA-gzl">
@@ -48,7 +42,6 @@
                     <connections>
                         <outlet property="cameraView" destination="vPP-yJ-BbZ" id="tk8-7d-R94"/>
                         <outlet property="emojiView" destination="syL-NA-gzl" id="Dbu-jq-2K8"/>
-                        <outlet property="spinner" destination="qHp-3d-XgT" id="fEz-dj-Tu6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
