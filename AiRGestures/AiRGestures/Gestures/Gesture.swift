@@ -10,30 +10,24 @@ import Foundation
 
 
 public enum Gesture: String {
-    case thumb = "THUMB"
     case oneFinger = "ONE"
     case twoFingers = "TWO"
-    case threeFingers = "THREE"
-    case fourFingers = "FOUR"
     case fiveFingers = "FIVE"
     case fist = "FIST"
+    case none = "NONE"
 }
 
 func getEmoji(gesture: Gesture) -> String{
     switch gesture {
-    case .thumb:
-        return "👍"
     case .oneFinger:
         return "☝️"
     case .twoFingers:
         return "✌️"
-    case .threeFingers:
-        return "👆👆👆"
-    case .fourFingers:
-        return "✌️✌️"
     case .fiveFingers:
         return "🖐"
     case .fist:
         return "✊"
+    case .none:
+        return ""
     }
 }
