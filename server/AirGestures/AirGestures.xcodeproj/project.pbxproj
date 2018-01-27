@@ -11,6 +11,8 @@
 		4F1AEE14201CBA1E00EFA8D7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F1AEE13201CBA1E00EFA8D7 /* ViewController.swift */; };
 		4F1AEE16201CBA1E00EFA8D7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4F1AEE15201CBA1E00EFA8D7 /* Assets.xcassets */; };
 		4F1AEE19201CBA1E00EFA8D7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4F1AEE17201CBA1E00EFA8D7 /* Main.storyboard */; };
+		E3816810201CC4B800A6881D /* EventMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E381680F201CC4B800A6881D /* EventMonitor.swift */; };
+		E3D93E5B201CC0E300624FC8 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D93E5A201CC0E300624FC8 /* MenuViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,6 +23,8 @@
 		4F1AEE18201CBA1E00EFA8D7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4F1AEE1A201CBA1E00EFA8D7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4F1AEE1B201CBA1E00EFA8D7 /* AirGestures.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AirGestures.entitlements; sourceTree = "<group>"; };
+		E381680F201CC4B800A6881D /* EventMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventMonitor.swift; sourceTree = "<group>"; };
+		E3D93E5A201CC0E300624FC8 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,7 +57,9 @@
 		4F1AEE10201CBA1E00EFA8D7 /* AirGestures */ = {
 			isa = PBXGroup;
 			children = (
+				E3D93E5A201CC0E300624FC8 /* MenuViewController.swift */,
 				4F1AEE11201CBA1E00EFA8D7 /* AppDelegate.swift */,
+				E381680F201CC4B800A6881D /* EventMonitor.swift */,
 				4F1AEE13201CBA1E00EFA8D7 /* ViewController.swift */,
 				4F1AEE15201CBA1E00EFA8D7 /* Assets.xcassets */,
 				4F1AEE17201CBA1E00EFA8D7 /* Main.storyboard */,
@@ -135,7 +141,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				4F1AEE14201CBA1E00EFA8D7 /* ViewController.swift in Sources */,
+				E3D93E5B201CC0E300624FC8 /* MenuViewController.swift in Sources */,
 				4F1AEE12201CBA1E00EFA8D7 /* AppDelegate.swift in Sources */,
+				E3816810201CC4B800A6881D /* EventMonitor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -266,7 +274,7 @@
 				CODE_SIGN_ENTITLEMENTS = AirGestures/AirGestures.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = V5YSHRDD9B;
+				DEVELOPMENT_TEAM = 74NQM6XVWF;
 				INFOPLIST_FILE = AirGestures/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.limoncello.AirGestures;
@@ -282,7 +290,7 @@
 				CODE_SIGN_ENTITLEMENTS = AirGestures/AirGestures.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = V5YSHRDD9B;
+				DEVELOPMENT_TEAM = 74NQM6XVWF;
 				INFOPLIST_FILE = AirGestures/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.limoncello.AirGestures;
