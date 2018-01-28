@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SceneKit
 import AVFoundation
 import MultipeerConnectivity
 
@@ -17,11 +18,17 @@ enum PTType: UInt32 {
 class ViewController: UIViewController {
     
     
+    @IBOutlet weak var sceneView: SCNView!
+    @IBOutlet weak var label: UILabel!
     @IBOutlet weak var emojiView: UITextView!
-    @IBOutlet weak var cameraView: UIView!
     var session: AVCaptureSession!
     var videoPreviewLayer: AVCaptureVideoPreviewLayer?
     var gestureRecogniser: GestureRecogniser!
+    var orb: SCNSphere!
+    var orbNode: SCNNode?
+    var previousGesture : Gesture?
+    var layer = true
+    var forward  = true
     
     override func viewDidLoad() {
         gestureRecogniser = GestureRecogniser()
@@ -29,10 +36,28 @@ class ViewController: UIViewController {
         PTManager.instance.delegate = self
         PTManager.instance.connect(portNumber: 4986)
         print("PT Connected")
+        let scene = SCNScene()
+        sceneView.scene = scene
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        registerForPreviewing(with: self, sourceView: view)
+        orb = SCNSphere(radius: 1)
+        let material  = orb.firstMaterial!
+        let scene = sceneView.scene
+        material.lightingModel = SCNMaterial.LightingModel.physicallyBased
+        material.diffuse.contents = UIImage(named: "scuffed-plastic-albedo")
+        material.roughness.contents = UIImage(named: "scuffed-plastic-roughness")
+        material.metalness.contents = UIImage(named: "scuffed-plastic-metal")
+        material.normal.contents = UIImage(named: "scuffed-plastic-normal")
+        let env = UIImage(named: "spherical")
+        scene!.lightingEnvironment.contents = env
+        scene!.lightingEnvironment.intensity = 2.0
+        orbNode = SCNNode(geometry: orb)
+        orbNode?.position = SCNVector3Make(0, 0, 0)
+        scene!.rootNode.addChildNode(orbNode!)
+        scene?.rootNode.position = SCNVector3Make(0, 0, -2)
         //Camera Setup
         session = AVCaptureSession()
         session!.sessionPreset = AVCaptureSession.Preset.high
@@ -51,7 +76,6 @@ class ViewController: UIViewController {
                 videoPreviewLayer = AVCaptureVideoPreviewLayer(session: session)
                 videoPreviewLayer!.videoGravity = AVLayerVideoGravity.resizeAspect
                 videoPreviewLayer!.connection?.videoOrientation = AVCaptureVideoOrientation.portrait
-                cameraView.layer.addSublayer(videoPreviewLayer!)
                 session!.startRunning()
             }
             videoDeviceOutput = AVCaptureVideoDataOutput()
@@ -65,7 +89,6 @@ class ViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        self.videoPreviewLayer!.frame = self.cameraView.bounds
     }
 
 }
@@ -90,10 +113,42 @@ extension ViewController: GestureDelegate {
     func didGetGesture(_ gesture: Gesture) {
         //print("Got gesture \(gesture)")
         DispatchQueue.main.sync {
-            emojiView.text = getEmoji(gesture: gesture)
-            PTManager.instance.sendObject(object:gesture.rawValue)
+            if gesture != previousGesture{
+                emojiView.text = getEmoji(gesture: gesture)
+                PTManager.instance.sendObject(object:gesture.rawValue)
+            }
         }
-        
+        if gesture != Gesture.none{
+            orb.firstMaterial?.emission.contents = UIColor.purple
+            let light = SCNLight()
+            light.type = SCNLight.LightType.omni
+            light.color = UIColor.purple
+            orbNode?.light = light
+        }else{
+            orb.firstMaterial?.emission.contents = UIColor.black
+            orbNode?.light = nil
+        }
+        switch gesture {
+        case Gesture.fist:
+            layer = false
+            forward = true
+        case Gesture.twoFingers:
+            forward = false
+        default:
+            layer = true
+            forward = true
+        }
+        var z: Float = 0
+        var y: Float = 0
+        if !layer{
+            z = -2
+        }
+        if !forward{
+            y = 1
+        }
+        SCNTransaction.animationDuration = 0.1
+        orbNode?.position = SCNVector3Make(0, y, z)
+        previousGesture = gesture
     }
 }
 
@@ -111,3 +166,19 @@ extension ViewController: PTManagerDelegate {
     
     
 }
+
+extension ViewController: UIViewControllerPreviewingDelegate{
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
+        print("here")
+        guard let viewController = storyboard?.instantiateViewController(withIdentifier: "mkl") as? ViewController else { return nil }
+        viewController.preferredContentSize = CGSize(width: 0, height: 500)
+        return viewController
+    }
+    
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {return}
+    
+    
+}
+
+
+
