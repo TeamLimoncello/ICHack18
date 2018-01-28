@@ -3,10 +3,13 @@
 AirGestures is the new way to interact with your computer effortlessly,
 without even needing to touch it.
 
-It's perfect when
+It's perfect:
 
--   cooking, to scroll the recipe
--   lecturing, to keep chalk off their laptops
+-   for elderly computer users with limited fine motor control.
+-   when cooking, to scroll the recipe.
+-   when lecturing, to keep chalk off their laptops.
+
+In future it could be further expanded into areas such as driving, where drawing the eye away from the road to use digital instruments can be dangerous, so gestures would be perfect.
 
 ## Getting Started
 
