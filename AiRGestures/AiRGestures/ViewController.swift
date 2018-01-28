@@ -18,11 +18,11 @@ class ViewController: UIViewController {
     @IBOutlet weak var imageView: UIImageView!
     var gestureRecogniser: GestureRecogniser!
     var videoPreviewLayer: AVCaptureVideoPreviewLayer!
-    var vision: Vision!
+    //var vision: Vision!
     
     override func viewDidLoad() {
         gestureRecogniser = GestureRecogniser()
-        vision = Vision()
+        //vision = Vision()
         gestureRecogniser.delegate = self
         PTManager.instance.delegate = self
         PTManager.instance.connect(portNumber: 4986)
@@ -46,7 +46,7 @@ class ViewController: UIViewController {
                 videoPreviewLayer = AVCaptureVideoPreviewLayer(session: session)
                 videoPreviewLayer.videoGravity = AVLayerVideoGravity.resizeAspect
                 videoPreviewLayer.connection?.videoOrientation = AVCaptureVideoOrientation.portrait
-                //cameraView.layer.addSublayer(videoPreviewLayer)
+                cameraView.layer.addSublayer(videoPreviewLayer)
                 session.startRunning()
             }
             let videoDeviceOutput = AVCaptureVideoDataOutput()
@@ -67,21 +67,28 @@ class ViewController: UIViewController {
 
 extension ViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
-        if vision.requiresRefresh() {
-            vision.setBackgroundImage(sampleBuffer)
-        }
+//        if vision.requiresRefresh() {
+//            vision.setBackgroundImage(sampleBuffer)
+//        }
         
         
         gestureRecogniser.detectGestures(in: sampleBuffer)
-        let result = vision.calculateResultingBuffer(from: sampleBuffer)
-        let uiImage = UIImage(cgImage: result)
-        DispatchQueue.main.sync {
-            imageView.image = uiImage
-        }
+//        let pixelBuffer: CVPixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer)!
+//        let width = CVPixelBufferGetHeight(pixelBuffer)
+//        let height = CVPixelBufferGetWidth(pixelBuffer)
+//
+//        let ciImage = CIImage(cvPixelBuffer: pixelBuffer).oriented(.leftMirrored)
+//        let videoImage = Vision.context.createCGImage(ciImage, from: CGRect(x: 0, y: 0, width: width, height: height))
+//
+//        let result = vision.processPixels(in: UIImage(cgImage: videoImage!))
+//        DispatchQueue.main.sync {
+//            imageView.image = result
+//        }
     }
 }
 
 extension ViewController: GestureDelegate {
+    
     func didGetError(_ error: Error) {
         print("Error! \(error)")
         emojiView.text = "💔"
@@ -94,14 +101,10 @@ extension ViewController: GestureDelegate {
         }
     }
     
-    func drawRect(_ rect: CGRect) {
-        DispatchQueue.main.sync {
-            let rView = UIView(frame: rect)
-            rView.layer.borderColor = UIColor.red.cgColor
-            rView.layer.borderWidth = 0.8
-            view.addSubview(rView)
-        }
+    func didGetSwipe(_ swipe: Swipe) {
+        
     }
+    
 }
 
 extension ViewController: PTManagerDelegate {

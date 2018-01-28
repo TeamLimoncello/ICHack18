@@ -12,5 +12,5 @@ import CoreGraphics
 public protocol GestureDelegate {
     func didGetGesture(_ gesture: Gesture)
     func didGetError(_ error: Error)
-    func drawRect(_ rect: CGRect)
+    func didGetSwipe(_ swipe: Swipe)
 }

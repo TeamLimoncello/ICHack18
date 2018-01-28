@@ -19,6 +19,8 @@
 		6933C676201CC5DA003522B3 /* GestureDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6933C675201CC5DA003522B3 /* GestureDelegate.swift */; };
 		6933C680201CD94E003522B3 /* GestureModel.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 6933C67F201CD94E003522B3 /* GestureModel.mlmodel */; };
 		6933C69B201D40D6003522B3 /* ComputerVision.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6933C69A201D40D6003522B3 /* ComputerVision.swift */; };
+		6981CA4E201D6E830059CBC0 /* SwipeRecogniser.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 6981CA4D201D6E830059CBC0 /* SwipeRecogniser.mlmodel */; };
+		6981CA50201D82110059CBC0 /* Swipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6981CA4F201D82110059CBC0 /* Swipe.swift */; };
 		698D7026201CB67A00182211 /* GestureRecogniser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698D7025201CB67A00182211 /* GestureRecogniser.swift */; };
 		698D7028201CB7FF00182211 /* Gesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698D7027201CB7FF00182211 /* Gesture.swift */; };
 /* End PBXBuildFile section */
@@ -45,6 +47,8 @@
 		6933C675201CC5DA003522B3 /* GestureDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GestureDelegate.swift; sourceTree = "<group>"; };
 		6933C67F201CD94E003522B3 /* GestureModel.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = GestureModel.mlmodel; sourceTree = "<group>"; };
 		6933C69A201D40D6003522B3 /* ComputerVision.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComputerVision.swift; sourceTree = "<group>"; };
+		6981CA4D201D6E830059CBC0 /* SwipeRecogniser.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = SwipeRecogniser.mlmodel; sourceTree = "<group>"; };
+		6981CA4F201D82110059CBC0 /* Swipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Swipe.swift; sourceTree = "<group>"; };
 		698D7025201CB67A00182211 /* GestureRecogniser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GestureRecogniser.swift; sourceTree = "<group>"; };
 		698D7027201CB7FF00182211 /* Gesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gesture.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -113,10 +117,12 @@
 			isa = PBXGroup;
 			children = (
 				6933C69A201D40D6003522B3 /* ComputerVision.swift */,
+				6981CA4D201D6E830059CBC0 /* SwipeRecogniser.mlmodel */,
 				6933C67F201CD94E003522B3 /* GestureModel.mlmodel */,
 				698D7025201CB67A00182211 /* GestureRecogniser.swift */,
 				698D7027201CB7FF00182211 /* Gesture.swift */,
 				6933C675201CC5DA003522B3 /* GestureDelegate.swift */,
+				6981CA4F201D82110059CBC0 /* Swipe.swift */,
 			);
 			path = Gestures;
 			sourceTree = "<group>";
@@ -194,6 +200,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6981CA4E201D6E830059CBC0 /* SwipeRecogniser.mlmodel in Sources */,
 				6933C69B201D40D6003522B3 /* ComputerVision.swift in Sources */,
 				6933C680201CD94E003522B3 /* GestureModel.mlmodel in Sources */,
 				6933C676201CC5DA003522B3 /* GestureDelegate.swift in Sources */,
@@ -202,8 +209,8 @@
 				47360724201D3EDE00C0B50D /* PTChannel.m in Sources */,
 				698D7028201CB7FF00182211 /* Gesture.swift in Sources */,
 				47FB60E5201D349300392433 /* PTManager.swift in Sources */,
-				6933C67A201CD34A003522B3 /* GestureModel.mlmodel in Sources */,
 				47360725201D3EDE00C0B50D /* PTUSBHub.m in Sources */,
+				6981CA50201D82110059CBC0 /* Swipe.swift in Sources */,
 				698D7026201CB67A00182211 /* GestureRecogniser.swift in Sources */,
 				47360726201D3EDE00C0B50D /* PTProtocol.m in Sources */,
 			);
@@ -344,7 +351,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = F6DNZ4X96B;
+				DEVELOPMENT_TEAM = 95HMAHL2SN;
 				INFOPLIST_FILE = AiRGestures/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.limoncello.AiRGestures;
@@ -363,7 +370,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = F6DNZ4X96B;
+				DEVELOPMENT_TEAM = 95HMAHL2SN;
 				INFOPLIST_FILE = AiRGestures/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.limoncello.AiRGestures;
