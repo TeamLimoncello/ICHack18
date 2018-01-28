@@ -9,14 +9,6 @@
 import Cocoa
 
 class MenuViewController: NSViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        print("Clicking..")
-        GSM.click()
-        print("Clicked.")
-    }
-    
     @IBAction func quitClicked(_ sender: Any) {
         NSApplication.shared.terminate(self)
     }

@@ -15,11 +15,10 @@ enum AppState {
 
 class GestureServiceManager : NSObject {
     let ptManager = PTManager.instance
-    var state: AppState? {
-        didSet {
-            print("Current state: \(String(describing: state))")
-        }
-    }
+    var state: AppState?
+    
+    // For music state, set to playing or paused
+    var MusicPlaying = false
     
     override init() {
         super.init()
@@ -30,6 +29,8 @@ class GestureServiceManager : NSObject {
         ptManager.connect(portNumber: PORT_NUMBER)
         
         print("Initialized Gesture Service manager on port \(PORT_NUMBER)")
+        
+        musicClick()
     }
     
     func click() {
@@ -42,63 +43,59 @@ class GestureServiceManager : NSObject {
     
     func sysClick(){
         print("Doing sys click")
-        if let clickScriptPath = Bundle.main.path(forResource: "click", ofType: "applescript") {
-            do {
-                let clickScriptContents = try String(contentsOfFile: clickScriptPath)
-                
-                var error: NSDictionary?
-                if let csc = NSAppleScript(source: clickScriptContents) {
-                    let _: NSAppleEventDescriptor = csc.executeAndReturnError(&error)
-                    if (error != nil) {
-                        print("error: \(String(describing: error))")
-                    } else {
-                        print("Executed sys click script successfully")
-                    }
-                }
-            } catch {
-                print("Contents of applescript could not be loaded")
-            }
-        } else {
-            print("Click script could not be found!")
-        }
+        let path = Bundle.main.path(forResource: "cliclick", ofType: "")
+        let arguments = ["c:+0,+0"]
+        
+        let task = Process.launchedProcess(launchPath: path!, arguments: arguments)
+        task.waitUntilExit()
     }
     
     func musicClick(){
         print("Doing music click")
-        if let clickScriptPath = Bundle.main.path(forResource: "iTunes-Play", ofType: "scpt") {
-            do {
-                let clickScriptContents = try String(contentsOfFile: clickScriptPath)
-                
-                var error: NSDictionary?
-                if let csc = NSAppleScript(source: clickScriptContents) {
-                    let _: NSAppleEventDescriptor = csc.executeAndReturnError(&error)
-                    if (error != nil) {
-                        print("error: \(String(describing: error))")
-                    } else {
-                        print("Executed music click script successfully")
-                    }
+        MusicPlaying = !MusicPlaying
+        let myAppleScript = MusicPlaying ? "tell application \"iTunes\" to play" : "tell application \"iTunes\" to pause"
+        executeScript(scr: myAppleScript)
+    }
+    
+    func swipeRight() {
+        let myAppleScript = "tell application \"System Events\"\nkey code 124 using control down -- control-right\nend"
+        executeScript(scr: myAppleScript)
+    }
+    
+    func swipeLeft() {
+        let myAppleScript = "tell application \"System Events\"\nkey code 123 using control down -- control-left\nend"
+        executeScript(scr: myAppleScript)
+    }
+    
+    func executeScript(scr: String) {
+        var error: NSDictionary?
+        if let scriptObject = NSAppleScript(source: scr) {
+            if let output: NSAppleEventDescriptor = scriptObject.executeAndReturnError(
+                &error) {
+                if let out = output.stringValue {
+                    print(out)
                 }
-            } catch {
-                print("Contents of applescript could not be loaded")
+            } else if (error != nil) {
+                print("error: \(String(describing: error))")
             }
-        } else {
-            print("Click script could not be found!")
         }
     }
     
     func process(gesture: Gesture) {
         switch gesture {
         case .oneFinger:
+            print("Set state to system")
             state = .SYSTEM
             break
         case .twoFingers:
+            print("Set state to music")
             state = .MUSIC
             break
         case .fist:
             click()
             break
         case .fiveFingers:
-            print("Five fingers")
+            swipeRight()
             break
         default:
             print("Do nothing")

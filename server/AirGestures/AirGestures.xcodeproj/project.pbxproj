@@ -16,14 +16,25 @@
 		4F686824201D388800339A32 /* PTProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F68681C201D388700339A32 /* PTProtocol.m */; };
 		4F686825201D388800339A32 /* PTChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F686820201D388800339A32 /* PTChannel.m */; };
 		4F686828201D499100339A32 /* Gesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F686827201D499100339A32 /* Gesture.swift */; };
-		4F68682D201D5B7400339A32 /* click.applescript in Sources */ = {isa = PBXBuildFile; fileRef = 4F68682B201D586900339A32 /* click.applescript */; };
-		4F68682E201D5C8400339A32 /* click.applescript in Resources */ = {isa = PBXBuildFile; fileRef = 4F68682B201D586900339A32 /* click.applescript */; };
-		4F686831201D7A8000339A32 /* iTunes-Pause.scpt in Resources */ = {isa = PBXBuildFile; fileRef = 4F68682F201D7A8000339A32 /* iTunes-Pause.scpt */; };
-		4F686832201D7A8000339A32 /* iTunes-Play.scpt in Resources */ = {isa = PBXBuildFile; fileRef = 4F686830201D7A8000339A32 /* iTunes-Play.scpt */; };
+		4F686834201D81BB00339A32 /* cliclick in Resources */ = {isa = PBXBuildFile; fileRef = 4F686833201D81BB00339A32 /* cliclick */; };
+		4F686836201D81D500339A32 /* cliclick in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4F686833201D81BB00339A32 /* cliclick */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		E3816810201CC4B800A6881D /* EventMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E381680F201CC4B800A6881D /* EventMonitor.swift */; };
 		E3816812201CC7DC00A6881D /* GestureServiceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3816811201CC7DC00A6881D /* GestureServiceManager.swift */; };
 		E3D93E5B201CC0E300624FC8 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D93E5A201CC0E300624FC8 /* MenuViewController.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		4F686835201D81D000339A32 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 7;
+			files = (
+				4F686836201D81D500339A32 /* cliclick in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		4F1AEE0E201CBA1E00EFA8D7 /* AirGestures.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AirGestures.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -46,9 +57,7 @@
 		4F686820201D388800339A32 /* PTChannel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PTChannel.m; sourceTree = "<group>"; };
 		4F686822201D388800339A32 /* PTPrivate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PTPrivate.h; sourceTree = "<group>"; };
 		4F686827201D499100339A32 /* Gesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gesture.swift; sourceTree = "<group>"; };
-		4F68682B201D586900339A32 /* click.applescript */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.applescript; path = click.applescript; sourceTree = "<group>"; };
-		4F68682F201D7A8000339A32 /* iTunes-Pause.scpt */ = {isa = PBXFileReference; lastKnownFileType = file; path = "iTunes-Pause.scpt"; sourceTree = "<group>"; };
-		4F686830201D7A8000339A32 /* iTunes-Play.scpt */ = {isa = PBXFileReference; lastKnownFileType = file; path = "iTunes-Play.scpt"; sourceTree = "<group>"; };
+		4F686833201D81BB00339A32 /* cliclick */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = cliclick; sourceTree = "<group>"; };
 		E381680F201CC4B800A6881D /* EventMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventMonitor.swift; sourceTree = "<group>"; };
 		E3816811201CC7DC00A6881D /* GestureServiceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GestureServiceManager.swift; sourceTree = "<group>"; };
 		E3D93E5A201CC0E300624FC8 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
@@ -91,9 +100,7 @@
 				4F686827201D499100339A32 /* Gesture.swift */,
 				E381680F201CC4B800A6881D /* EventMonitor.swift */,
 				4F1AEE15201CBA1E00EFA8D7 /* Assets.xcassets */,
-				4F68682F201D7A8000339A32 /* iTunes-Pause.scpt */,
-				4F686830201D7A8000339A32 /* iTunes-Play.scpt */,
-				4F68682B201D586900339A32 /* click.applescript */,
+				4F686833201D81BB00339A32 /* cliclick */,
 				4F1AEE17201CBA1E00EFA8D7 /* Main.storyboard */,
 				4F1AEE1A201CBA1E00EFA8D7 /* Info.plist */,
 				4F1AEE1B201CBA1E00EFA8D7 /* AirGestures.entitlements */,
@@ -131,6 +138,7 @@
 				4F1AEE0A201CBA1E00EFA8D7 /* Sources */,
 				4F1AEE0B201CBA1E00EFA8D7 /* Frameworks */,
 				4F1AEE0C201CBA1E00EFA8D7 /* Resources */,
+				4F686835201D81D000339A32 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -180,9 +188,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4F686831201D7A8000339A32 /* iTunes-Pause.scpt in Resources */,
-				4F68682E201D5C8400339A32 /* click.applescript in Resources */,
-				4F686832201D7A8000339A32 /* iTunes-Play.scpt in Resources */,
+				4F686834201D81BB00339A32 /* cliclick in Resources */,
 				4F1AEE16201CBA1E00EFA8D7 /* Assets.xcassets in Resources */,
 				4F1AEE19201CBA1E00EFA8D7 /* Main.storyboard in Resources */,
 			);
@@ -200,7 +206,6 @@
 				E3D93E5B201CC0E300624FC8 /* MenuViewController.swift in Sources */,
 				4F1AEE12201CBA1E00EFA8D7 /* AppDelegate.swift in Sources */,
 				4F686825201D388800339A32 /* PTChannel.m in Sources */,
-				4F68682D201D5B7400339A32 /* click.applescript in Sources */,
 				4F686811201D360000339A32 /* PTManager.swift in Sources */,
 				4F686824201D388800339A32 /* PTProtocol.m in Sources */,
 				4F686828201D499100339A32 /* Gesture.swift in Sources */,
