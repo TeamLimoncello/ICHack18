@@ -9,6 +9,7 @@
 import Cocoa
 
 class MenuViewController: NSViewController {
+    @IBOutlet weak var emojiTextField: NSTextField!
     @IBAction func quitClicked(_ sender: Any) {
         NSApplication.shared.terminate(self)
     }

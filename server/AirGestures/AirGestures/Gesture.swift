@@ -8,19 +8,23 @@
 
 import Foundation
 
-
 public enum Gesture: String {
-    case oneFinger = "ONE"
-    case twoFingers = "TWO"
-    case fiveFingers = "FIVE"
-    case fist = "FIST"
-    case none = "NONE"
+    case ok = "ok"
+    case twoFingers = "twoFingers"
+    case fiveFingers = "fiveFingers"
+    case fist = "fist"
+    case none = "none"
+}
+
+public enum Layer: String {
+    case Up = "true"
+    case Down = "false"
 }
 
 func getEmoji(gesture: Gesture) -> String {
     switch gesture {
-    case .oneFinger:
-        return "☝️"
+    case .ok:
+        return "👌"
     case .twoFingers:
         return "✌️"
     case .fiveFingers:

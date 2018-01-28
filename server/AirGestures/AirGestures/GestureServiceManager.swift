@@ -29,41 +29,53 @@ class GestureServiceManager : NSObject {
         ptManager.connect(portNumber: PORT_NUMBER)
         
         print("Initialized Gesture Service manager on port \(PORT_NUMBER)")
-        
-        musicClick()
     }
     
     func click() {
         if state == .SYSTEM {
-            sysClick()
+            pressEnter()
         } else if state == .MUSIC {
             musicClick()
         }
     }
     
-    func sysClick(){
-        print("Doing sys click")
-        let path = Bundle.main.path(forResource: "cliclick", ofType: "")
-        let arguments = ["c:+0,+0"]
-        
-        let task = Process.launchedProcess(launchPath: path!, arguments: arguments)
-        task.waitUntilExit()
+    func pressEnter(){
+//        print("Doing sys click")
+//        let path = Bundle.main.path(forResource: "cliclick", ofType: "")
+//        let arguments = ["c:+0,+0"]
+//
+//        let task = Process.launchedProcess(launchPath: path!, arguments: arguments)
+//        task.waitUntilExit()
+        let myAppleScript = "tell application \"System Events\"\nkey code 76 -- enter\nend"
+        executeScript(scr: myAppleScript)
     }
     
     func musicClick(){
         print("Doing music click")
         MusicPlaying = !MusicPlaying
-        let myAppleScript = MusicPlaying ? "tell application \"iTunes\" to play" : "tell application \"iTunes\" to pause"
+        let myAppleScript = "tell application \"iTunes\" to \(MusicPlaying ? "play" : "pause")"
+        executeScript(scr: myAppleScript)
+    }
+    
+    func nextSong(){
+        print("Next song")
+        let myAppleScript = "tell application \"iTunes\" to play next track"
+        executeScript(scr: myAppleScript)
+    }
+    
+    func previousSong(){
+        print("Previous song")
+        let myAppleScript = "tell application \"iTunes\" to play previous track"
         executeScript(scr: myAppleScript)
     }
     
     func swipeRight() {
-        let myAppleScript = "tell application \"System Events\"\nkey code 124 using control down -- control-right\nend"
+        let myAppleScript = "tell application \"System Events\"\nkey code 124 -- right\nend"
         executeScript(scr: myAppleScript)
     }
     
     func swipeLeft() {
-        let myAppleScript = "tell application \"System Events\"\nkey code 123 using control down -- control-left\nend"
+        let myAppleScript = "tell application \"System Events\"\nkey code 123 -- left\nend"
         executeScript(scr: myAppleScript)
     }
     
@@ -81,23 +93,39 @@ class GestureServiceManager : NSObject {
         }
     }
     
-    func process(gesture: Gesture) {
-        switch gesture {
-        case .oneFinger:
-            print("Set state to system")
-            state = .SYSTEM
-            break
-        case .twoFingers:
-            print("Set state to music")
+    func switchState() {
+        if state == .SYSTEM {
             state = .MUSIC
-            break
-        case .fist:
-            click()
-            break
-        case .fiveFingers:
-            swipeRight()
-            break
-        default:
+        } else {
+            state = .SYSTEM
+        }
+    }
+    
+    func process(gesture: Gesture, layer: Layer) {
+        if gesture == .ok {
+            print("Set state to system")
+            if state == .SYSTEM {
+                pressEnter()
+            } else {
+                musicClick()
+            }
+        } else if gesture == .twoFingers && layer == .Up {
+            print("Going forward")
+            if state == .SYSTEM {
+                swipeRight()
+            } else {
+                
+            }
+        } else if gesture == .twoFingers && layer == .Down {
+            print("Going backward")
+            if state == .SYSTEM {
+                swipeLeft()
+            } else {
+                
+            }
+        } else if gesture == .fiveFingers {
+            switchState()
+        } else {
             print("Do nothing")
         }
     }
@@ -110,9 +138,14 @@ extension GestureServiceManager: PTManagerDelegate {
     }
     
     func peertalk(didReceiveData data: Data) {
-        let num = data.convert() as! String
-        let gest = Gesture(rawValue: num)
-        process(gesture: gest ?? .none)
+        // Will be "gesture,layer"
+        let payload = data.convert() as! String
+
+        let gest = payload.split(separator: ",")
+        let gesture = Gesture(rawValue: String(gest[0]))
+        let layer = Layer(rawValue: String(gest[1]))
+        
+        process(gesture: gesture ?? .none, layer: layer!)
     }
     
     func peertalk(didChangeConnection connected: Bool) {

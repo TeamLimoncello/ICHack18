@@ -733,6 +733,9 @@
                             <constraint firstItem="TZH-7P-D6t" firstAttribute="centerX" secondItem="m2S-Jp-Qdl" secondAttribute="centerX" id="oxH-yL-dhN"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="emojiTextField" destination="ccJ-4q-WpG" id="SI8-9J-Q8Y"/>
+                    </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
