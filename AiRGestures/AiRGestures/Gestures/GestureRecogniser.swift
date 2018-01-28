@@ -55,7 +55,7 @@ public class GestureRecogniser {
             print("Error whilst parsing results")
             return
         }
-        let filteredResults = results.filter({$0.confidence > 0.1})
+        let filteredResults = results.filter({$0.confidence > 0.05})
         let probableObservation = filteredResults.sorted { (observationA, observationB) -> Bool in
             return observationA.confidence > observationB.confidence
             }.first
