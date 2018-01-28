@@ -88,6 +88,7 @@
                     </view>
                     <connections>
                         <outlet property="emojiView" destination="syL-NA-gzl" id="Dbu-jq-2K8"/>
+                        <outlet property="instructionStackView" destination="Z6V-TT-qox" id="YU7-VV-nV1"/>
                         <outlet property="label" destination="Pcy-WT-Bmn" id="vMz-t5-dyg"/>
                         <outlet property="sceneView" destination="QXm-wr-azS" id="Cjq-Il-rTw"/>
                     </connections>

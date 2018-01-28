@@ -21,6 +21,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var sceneView: SCNView!
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var emojiView: UITextView!
+    @IBOutlet weak var instructionStackView: UIStackView!
     var session: AVCaptureSession!
     var videoPreviewLayer: AVCaptureVideoPreviewLayer?
     var gestureRecogniser: GestureRecogniser!
@@ -44,6 +45,14 @@ class ViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         registerForPreviewing(with: self, sourceView: view)
+        setupBall()
+        
+        label.alpha = 0
+        emojiView.alpha = 0
+        instructionStackView.alpha = 0
+    }
+    
+    func setupBall(){
         orb = SCNSphere(radius: 1)
         let material  = orb.firstMaterial!
         let scene = sceneView.scene
@@ -59,7 +68,35 @@ class ViewController: UIViewController {
         orbNode?.position = SCNVector3Make(0, 0, 0)
         scene!.rootNode.addChildNode(orbNode!)
         scene?.rootNode.position = SCNVector3Make(0, 0, -2)
-        //Camera Setup
+        
+        performRoll(onNode: orbNode!)
+    }
+    
+    func performRoll(onNode node: SCNNode){
+        let move = SCNAction.move(by: SCNVector3.init(7, 0, 0), duration: 0)
+        node.runAction(move)
+        let roll = SCNAction.move(by: SCNVector3.init(-7, 0, 0), duration: 1.4)
+        roll.timingMode = .easeOut
+        node.runAction(roll)
+        
+        
+        let animation = CABasicAnimation(keyPath: "rotation")
+        animation.duration = 1.4
+        animation.fromValue = NSValue(scnVector4: SCNVector4(0.5, 0, -2, Double.pi * 2.0))
+        animation.toValue = NSValue(scnVector4: SCNVector4Make(0.5, 9.5, -2, 0))
+        node.addAnimation(animation, forKey: "planetRotation")
+        let _ = Timer.scheduledTimer(withTimeInterval: 1.6, repeats: false) { (_) in
+            self.setupCamera()
+            UIView.animate(withDuration: 0.8, animations: {
+                self.emojiView.alpha = 1
+                self.label.alpha = 1
+                self.instructionStackView.alpha = 1
+            })
+        }
+    }
+    
+    func setupCamera(){
+        print("Setting up camera...")
         let session = AVCaptureSession()
         session.sessionPreset = AVCaptureSession.Preset.high
         guard let frontCameraDevice = AVCaptureDevice.default(.builtInWideAngleCamera, for: AVMediaType.video, position: .front) else{
@@ -84,11 +121,6 @@ class ViewController: UIViewController {
             print("Error whilst setting up camera \(error)")
         }
     }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-    }
-
 }
 
 extension ViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
