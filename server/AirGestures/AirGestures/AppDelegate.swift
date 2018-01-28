@@ -13,7 +13,10 @@ import Cocoa
     let statusItem = NSStatusBar.system.statusItem(withLength:NSStatusItem.squareLength)
     let popover = NSPopover()
     var eventMonitor: EventMonitor?
-
+    var button : NSStatusBarButton?
+    var disabledImage : NSImage?
+    var enabledImage : NSImage?
+    
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         setupMenuBarIcon()
         setupEventMonitor()
@@ -21,13 +24,18 @@ import Cocoa
     }
     
     func setupMenuBarIcon() {
-        if let button = statusItem.button {
-            let menuBarImage = NSImage(named:NSImage.Name("Menu Bar Icon"))
-            menuBarImage?.isTemplate = true
-            button.image = menuBarImage
-            button.action = #selector(togglePopover(_:))
-        }
+        button = statusItem.button
+        enabledImage = NSImage(named:NSImage.Name("Menu Bar Icon"))
+        enabledImage?.isTemplate = true
+        disabledImage = NSImage(named:NSImage.Name("Menu Bar Icon Disabled"))
+        disabledImage?.isTemplate = true
+        button?.image = disabledImage
+        button?.action = #selector(togglePopover(_:))
         popover.contentViewController = MenuViewController.freshController()
+    }
+    
+    func setIcon(isEnabled: Bool) {
+        button?.image = isEnabled ? enabledImage : disabledImage;
     }
     
     func setupEventMonitor() {

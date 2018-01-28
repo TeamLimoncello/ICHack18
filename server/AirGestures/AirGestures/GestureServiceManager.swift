@@ -70,12 +70,12 @@ class GestureServiceManager : NSObject {
     }
     
     func swipeRight() {
-        let myAppleScript = "tell application \"System Events\"\nkey code 124 -- right\nend"
+        let myAppleScript = "tell application \"System Events\" to key code 124 -- right"
         executeScript(scr: myAppleScript)
     }
     
     func swipeLeft() {
-        let myAppleScript = "tell application \"System Events\"\nkey code 123 -- left\nend"
+        let myAppleScript = "tell application \"System Events\" to key code 123 -- left"
         executeScript(scr: myAppleScript)
     }
     
@@ -151,6 +151,8 @@ extension GestureServiceManager: PTManagerDelegate {
     func peertalk(didChangeConnection connected: Bool) {
         print("Connection: \(connected)")
         print(connected ? "Connected" : "Disconnected")
+        (NSApplication.shared.delegate as! AppDelegate).setIcon(isEnabled: connected)
+        
     }
 }
 
