@@ -14,27 +14,30 @@
                 top: 0;
                 left: 0;
                 right: 0;
-                height: 50px;
                 background-color: rgba(64,64,64,0.7);
                 color: white;
                 overflow: hidden;
             }
 
+            header::after {
+                content: '';
+                clear: both;
+            }
+
             header h6 {
-                position: absolute;
-                left: calc(50vw - 400px);
-                top: 0;
                 margin: 0;
+                float: left;
                 font-weight: normal;
                 font-size: 27px;
                 padding: 10px 0;
+                padding-left: calc(50vw - 400px);
             }
 
             header nav {
-                display: block;
-                position: absolute;
-                right: calc(50vw - 400px);
+                float: right;
+                padding-right: calc(50vw - 400px);
                 font-size: 18px;
+                text-align: right;
             }
 
             header nav a {
@@ -57,6 +60,13 @@
                 padding: calc(50px + (100vh - 50px)/10) 10vw 10vw;
                 box-sizing: border-box;
                 height: 100vh;
+            }
+
+            @media screen and (max-width: 470px) {
+                header nav a {
+                    display: block;
+                    margin-left: -100vw;
+                }
             }
 
             section.left {
