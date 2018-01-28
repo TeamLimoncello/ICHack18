@@ -202,7 +202,7 @@ extension ViewController: PTManagerDelegate {
 extension ViewController: UIViewControllerPreviewingDelegate{
     func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
         print("here")
-        guard let viewController = storyboard?.instantiateViewController(withIdentifier: "mkl") as? ViewController else { return nil }
+        guard let viewController = storyboard?.instantiateViewController(withIdentifier: "mkl") as? DetailView else { return nil }
         viewController.preferredContentSize = CGSize(width: 0, height: 500)
         return viewController
     }
