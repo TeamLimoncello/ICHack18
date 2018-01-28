@@ -62,19 +62,33 @@
                 height: 100vh;
             }
 
-            @media screen and (max-width: 470px) {
-                header nav a {
-                    display: block;
-                    margin-left: -100vw;
-                }
-            }
-
             section.left {
                 padding-right: 60vw;
             }
 
             section.right {
                 padding-left: 60vw;
+            }
+
+            @media screen and (max-width: 600px) {
+                section.left {
+                    padding-right: 10vw;
+                }
+
+                section.right {
+                    padding-left: 10vw;
+                }
+            }
+
+            @media screen and (max-width: 470px) {
+                header nav a {
+                    display: block;
+                    margin-left: -100vw;
+                }
+
+                section {
+                    padding: calc(150px + (100vh - 150px)/10) 10vw 10vw;
+                }
             }
         </style>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -119,12 +133,16 @@
                     AirGestures is the new way to interact with your computer effortlessly, without even needing to touch it.
                 </p>
                 <p>
-                    It’s perfect when
+                    It’s perfect:
                 </p>
                 <ul>
-                    <li>cooking, to scroll the recipe</li>
-                    <li>lecturing, to keep chalk off their laptops</li>
+                    <li>for elderly computer users with limited fine motor control.</li>
+                    <li>when cooking, to scroll the recipe.</li>
+                    <li>when lecturing, to keep chalk off their laptops.</li>
                 </ul>
+                <p>
+                    In future it could be further expanded into areas such as driving, where drawing the eye away from the road to use digital instruments can be dangerous, so gestures would be perfect.
+                </p>
             </section>
             <section data-section-name="getting-started" class="left">
                 <h1>Getting Started</h1>
