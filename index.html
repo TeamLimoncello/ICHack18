@@ -82,6 +82,11 @@
 
                 $.scrollify.move($.attr(this, 'href'));
             });
+
+            $(document).on('keydown', function (event) {
+                if      (event.keyCode === 37) $.scrollify.previous();
+                else if (event.keyCode === 39) $.scrollify.next();
+            });
         </script>
         <link rel="icon" type="image/png" href="favicon-16.png" sizes="16x16">  
         <link rel="icon" type="image/png" href="favicon-32.png" sizes="32x32">  
