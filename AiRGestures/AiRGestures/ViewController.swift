@@ -91,7 +91,7 @@ extension ViewController: GestureDelegate {
         //print("Got gesture \(gesture)")
         DispatchQueue.main.sync {
             emojiView.text = getEmoji(gesture: gesture)
-            PTManager.instance.sendObject(object:gesture.rawValue, type: PTType.number.rawValue)
+            PTManager.instance.sendObject(object:gesture.rawValue)
         }
         
     }

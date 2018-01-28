@@ -79,10 +79,10 @@ protocol PTManagerDelegate {
         /** Sends data to the connected device
          * Uses NSKeyedArchiver to convert the object to data
          */
-        func sendObject(object: Any, type: UInt32, completion: ((_ success: Bool) -> Void)? = nil) {
+        func sendObject(object: Any, completion: ((_ success: Bool) -> Void)? = nil) {
             let data = Data.toData(object: object)
             if peerChannel != nil {
-                peerChannel?.sendFrame(ofType: type, tag: PTFrameNoTag, withPayload: (data as NSData).createReferencingDispatchData(), callback: { (error) in
+                peerChannel?.sendFrame(ofType: 1, tag: PTFrameNoTag, withPayload: (data as NSData).createReferencingDispatchData(), callback: { (error) in
                     completion?(true)
                 })
             } else {
