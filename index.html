@@ -42,7 +42,7 @@
 
             header nav a {
                 text-decoration: none;
-                padding: 15px 30px;
+                padding: 15px 20px;
                 display: inline-block;
                 text-transform: uppercase;
                 color: inherit;
@@ -59,7 +59,7 @@
             section {
                 padding: calc(50px + (100vh - 50px)/10) 10vw 10vw;
                 box-sizing: border-box;
-                height: 100vh;
+                min-height: 100vh;
                 background-position: center;
             }
 
@@ -71,7 +71,7 @@
                 padding-left: 60vw;
             }
 
-            @media screen and (max-width: 600px) {
+            @media screen and (max-width: 600px), screen and (max-height: 500px) {
                 section.left {
                     padding-right: 10vw;
                 }
@@ -101,6 +101,7 @@
             section.youtube {
                 padding: 0;
                 padding-top: 50px;
+                height: 100vh;
             }
 
             section.youtube iframe {
@@ -131,6 +132,7 @@
                     section: "section",
                     updateHash: false,
                     animateAnchor: false,
+                    setHeights: false,
                 });
                 $('section.youtube').css({paddingTop: $('header').height()});
 
@@ -152,7 +154,8 @@
         </script>
         <link rel="icon" type="image/png" href="favicon-16.png" sizes="16x16">  
         <link rel="icon" type="image/png" href="favicon-32.png" sizes="32x32">  
-        <link rel="icon" type="image/png" href="favicon-96.png" sizes="96x96">  
+        <link rel="icon" type="image/png" href="favicon-96.png" sizes="96x96">
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
     </head>
     <body>
         <header>
@@ -193,7 +196,7 @@
                 </div>
             </section>
             <section data-section-name="demo" class="youtube">
-                <iframe src="https://www.youtube-nocookie.com/embed/Txow2uqXvOM?color=white&autohide=2&keyboard=1&modestbranding=1&rel=0&showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                <iframe src="https://www.youtube-nocookie.com/embed/Txow2uqXvOM?color=white&autohide=2&keyboard=1&modestbranding=1&rel=0&showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen height="100%" width="100%"></iframe>
             </section>
             <section data-section-name="tech" class="right bgLewis">
                 <div>
