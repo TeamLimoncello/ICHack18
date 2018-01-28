@@ -60,6 +60,7 @@
                 padding: calc(50px + (100vh - 50px)/10) 10vw 10vw;
                 box-sizing: border-box;
                 height: 100vh;
+                background-position: center;
             }
 
             section.left {
@@ -97,6 +98,16 @@
                 border-radius: 1em;
             }
 
+            section.youtube {
+                padding: 0;
+                padding-top: 50px;
+            }
+
+            section.youtube iframe {
+                width: 100%;
+                height: 100%;
+            }
+
             .bgBrendon {
                 background-image: url('brendon.jpeg');
                 background-size: cover;
@@ -121,6 +132,11 @@
                     updateHash: false,
                     animateAnchor: false,
                 });
+                $('section.youtube').css({paddingTop: $('header').height()});
+
+                $(window).on('resize', function () {
+                    $('section.youtube').css({paddingTop: $('header').height()});
+                });
             });
             $(document).on('click', 'a[href^="#"]', function (event) {
                 history.pushState(undefined, undefined, $.attr(this, 'href'));
@@ -144,6 +160,7 @@
             <nav>
                 <a href="#home">Home</a>
                 <a href="#getting-started">Getting Started</a>
+                <a href="#demo">Demo</a>
                 <a href="#tech">Tech</a>
             </nav>
         </header>
@@ -174,6 +191,9 @@
                         Using AirGestures is as simple as installing the app on your Mac and your iPhone, and then connecting them by USB cable. The app icon on Mac will then turn from grey to black, to show it has connected. You can now open a webpage, book or presentation, and then use gestures over your phone to control it.
                     </p>
                 </div>
+            </section>
+            <section data-section-name="demo" class="youtube">
+                <iframe src="https://www.youtube-nocookie.com/embed/Txow2uqXvOM?color=white&autohide=2&keyboard=1&modestbranding=1&rel=0&showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
             </section>
             <section data-section-name="tech" class="right bgLewis">
                 <div>
