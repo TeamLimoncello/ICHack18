@@ -74,7 +74,7 @@ class ViewController: UIViewController {
                 videoPreviewLayer = AVCaptureVideoPreviewLayer(session: session)
                 videoPreviewLayer!.videoGravity = AVLayerVideoGravity.resizeAspect
                 videoPreviewLayer!.connection?.videoOrientation = AVCaptureVideoOrientation.portrait
-                session!.startRunning()
+                session.startRunning()
             }
             let videoDeviceOutput = AVCaptureVideoDataOutput()
             let thread = DispatchQueue(label: "VideoSampleThread")

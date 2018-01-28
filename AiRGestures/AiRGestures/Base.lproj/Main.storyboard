@@ -6,7 +6,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -85,7 +84,7 @@
                             <constraint firstAttribute="bottom" secondItem="Pcy-WT-Bmn" secondAttribute="bottom" constant="20" id="xXd-Dp-KzM"/>
                             <constraint firstItem="QXm-wr-azS" firstAttribute="top" secondItem="Gg7-Ob-jDB" secondAttribute="top" id="yyG-3C-ZjV"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="Uvy-ZL-FMg"/>
+                        <viewLayoutGuide key="safeArea" id="S9A-ZJ-QFE"/>
                     </view>
                     <connections>
                         <outlet property="emojiView" destination="syL-NA-gzl" id="Dbu-jq-2K8"/>
