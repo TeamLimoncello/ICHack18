@@ -17,10 +17,10 @@
 		4754511E201C8FB0008B2CA8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4754511C201C8FB0008B2CA8 /* LaunchScreen.storyboard */; };
 		47FB60E5201D349300392433 /* PTManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47FB60E4201D349300392433 /* PTManager.swift */; };
 		6933C676201CC5DA003522B3 /* GestureDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6933C675201CC5DA003522B3 /* GestureDelegate.swift */; };
-		6933C680201CD94E003522B3 /* GestureModel.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 6933C67F201CD94E003522B3 /* GestureModel.mlmodel */; };
 		6933C69B201D40D6003522B3 /* ComputerVision.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6933C69A201D40D6003522B3 /* ComputerVision.swift */; };
 		6981CA4E201D6E830059CBC0 /* SwipeRecogniser.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 6981CA4D201D6E830059CBC0 /* SwipeRecogniser.mlmodel */; };
 		6981CA50201D82110059CBC0 /* Swipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6981CA4F201D82110059CBC0 /* Swipe.swift */; };
+		6981CA56201D939C0059CBC0 /* GestureModel.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 6981CA55201D939C0059CBC0 /* GestureModel.mlmodel */; };
 		698D7026201CB67A00182211 /* GestureRecogniser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698D7025201CB67A00182211 /* GestureRecogniser.swift */; };
 		698D7028201CB7FF00182211 /* Gesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698D7027201CB7FF00182211 /* Gesture.swift */; };
 /* End PBXBuildFile section */
@@ -45,10 +45,10 @@
 		4754511F201C8FB0008B2CA8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		47FB60E4201D349300392433 /* PTManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PTManager.swift; sourceTree = "<group>"; };
 		6933C675201CC5DA003522B3 /* GestureDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GestureDelegate.swift; sourceTree = "<group>"; };
-		6933C67F201CD94E003522B3 /* GestureModel.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = GestureModel.mlmodel; sourceTree = "<group>"; };
 		6933C69A201D40D6003522B3 /* ComputerVision.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComputerVision.swift; sourceTree = "<group>"; };
 		6981CA4D201D6E830059CBC0 /* SwipeRecogniser.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = SwipeRecogniser.mlmodel; sourceTree = "<group>"; };
 		6981CA4F201D82110059CBC0 /* Swipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Swipe.swift; sourceTree = "<group>"; };
+		6981CA55201D939C0059CBC0 /* GestureModel.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = GestureModel.mlmodel; sourceTree = "<group>"; };
 		698D7025201CB67A00182211 /* GestureRecogniser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GestureRecogniser.swift; sourceTree = "<group>"; };
 		698D7027201CB7FF00182211 /* Gesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gesture.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -116,9 +116,9 @@
 		698D7029201CB87A00182211 /* Gestures */ = {
 			isa = PBXGroup;
 			children = (
+				6981CA55201D939C0059CBC0 /* GestureModel.mlmodel */,
 				6933C69A201D40D6003522B3 /* ComputerVision.swift */,
 				6981CA4D201D6E830059CBC0 /* SwipeRecogniser.mlmodel */,
-				6933C67F201CD94E003522B3 /* GestureModel.mlmodel */,
 				698D7025201CB67A00182211 /* GestureRecogniser.swift */,
 				698D7027201CB7FF00182211 /* Gesture.swift */,
 				6933C675201CC5DA003522B3 /* GestureDelegate.swift */,
@@ -202,9 +202,9 @@
 			files = (
 				6981CA4E201D6E830059CBC0 /* SwipeRecogniser.mlmodel in Sources */,
 				6933C69B201D40D6003522B3 /* ComputerVision.swift in Sources */,
-				6933C680201CD94E003522B3 /* GestureModel.mlmodel in Sources */,
 				6933C676201CC5DA003522B3 /* GestureDelegate.swift in Sources */,
 				47545116201C8FB0008B2CA8 /* ViewController.swift in Sources */,
+				6981CA56201D939C0059CBC0 /* GestureModel.mlmodel in Sources */,
 				47545114201C8FB0008B2CA8 /* AppDelegate.swift in Sources */,
 				47360724201D3EDE00C0B50D /* PTChannel.m in Sources */,
 				698D7028201CB7FF00182211 /* Gesture.swift in Sources */,

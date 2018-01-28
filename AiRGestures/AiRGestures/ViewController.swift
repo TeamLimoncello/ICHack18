@@ -102,7 +102,7 @@ extension ViewController: GestureDelegate {
     }
     
     func didGetSwipe(_ swipe: Swipe) {
-        
+        print(swipe)
     }
     
 }

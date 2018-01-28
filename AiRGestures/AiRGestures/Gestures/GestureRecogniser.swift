@@ -66,7 +66,6 @@ public class GestureRecogniser {
         
 
         
-        
         guard error == nil else {
             delegate?.didGetError(error!)
             return
