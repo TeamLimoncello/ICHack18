@@ -114,14 +114,14 @@ class GestureServiceManager : NSObject {
             if state == .SYSTEM {
                 swipeRight()
             } else {
-                
+                nextSong()
             }
         } else if gesture == .twoFingers && layer == .Down {
             print("Going backward")
             if state == .SYSTEM {
                 swipeLeft()
             } else {
-                
+                previousSong()
             }
         } else if gesture == .fiveFingers {
             switchState()
@@ -142,8 +142,11 @@ extension GestureServiceManager: PTManagerDelegate {
         let payload = data.convert() as! String
 
         let gest = payload.split(separator: ",")
+        
         let gesture = Gesture(rawValue: String(gest[0]))
         let layer = Layer(rawValue: String(gest[1]))
+        state = String(gest[2]) == "MUSIC" ? .MUSIC : .SYSTEM
+        print("State is \(state)")
         
         process(gesture: gesture ?? .none, layer: layer!)
     }
