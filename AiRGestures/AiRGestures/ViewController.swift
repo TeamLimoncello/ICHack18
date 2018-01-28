@@ -19,6 +19,7 @@ class ViewController: UIViewController {
     
     
     @IBOutlet weak var sceneView: SCNView!
+    @IBOutlet weak var toggle: UISwitch!
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var emojiView: UITextView!
     @IBOutlet weak var instructionStackView: UIStackView!
@@ -140,7 +141,8 @@ extension ViewController: GestureDelegate {
         DispatchQueue.main.sync {
             if gesture != previousGesture{
                 emojiView.text = getEmoji(gesture: gesture)
-                PTManager.instance.sendObject(object:"\(gesture),\(layer)")
+                let toggleStatus = toggle.isOn ? "MUSIC" : "SYSTEM"
+                PTManager.instance.sendObject(object:"\(gesture),\(layer),\(toggleStatus)")
             }
         }
         if gesture != Gesture.none{

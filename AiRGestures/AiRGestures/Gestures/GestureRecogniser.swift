@@ -55,11 +55,15 @@ public class GestureRecogniser {
             print("Error whilst parsing results")
             return
         }
-        let probableObservation = results.sorted { (observationA, observationB) -> Bool in
+        let filteredResults = results.filter({$0.confidence > 0.1})
+        let probableObservation = filteredResults.sorted { (observationA, observationB) -> Bool in
             return observationA.confidence > observationB.confidence
-        }.first!
+            }.first
         // return (probableObservation.identifier, probableObservation.confidence)
-        delegate?.didGetGesture(Gesture(rawValue: probableObservation.identifier)!)
+        if case nil = probableObservation {
+            return
+        }
+        delegate?.didGetGesture(Gesture(rawValue: probableObservation!.identifier)!)
     }
     
     private func didGetSwipeResults(request: VNRequest, error: Error?) {

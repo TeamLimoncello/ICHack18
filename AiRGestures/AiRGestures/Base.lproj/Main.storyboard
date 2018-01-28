@@ -66,6 +66,13 @@
                                     </label>
                                 </subviews>
                             </stackView>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wQe-3k-Gu0">
+                                <rect key="frame" x="312" y="719" width="49" height="31"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="31" id="3qi-fc-h8F"/>
+                                    <constraint firstAttribute="width" constant="47" id="qMt-IQ-Fup"/>
+                                </constraints>
+                            </switch>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -76,8 +83,10 @@
                             <constraint firstItem="S9A-ZJ-QFE" firstAttribute="trailing" secondItem="Z6V-TT-qox" secondAttribute="trailing" constant="100" id="CHl-LU-klG"/>
                             <constraint firstItem="S9A-ZJ-QFE" firstAttribute="trailing" secondItem="QXm-wr-azS" secondAttribute="trailing" id="HSK-sW-dXy"/>
                             <constraint firstAttribute="bottom" secondItem="syL-NA-gzl" secondAttribute="bottom" id="Ney-Qp-o3Q"/>
+                            <constraint firstItem="S9A-ZJ-QFE" firstAttribute="bottom" secondItem="wQe-3k-Gu0" secondAttribute="bottom" constant="28" id="TgZ-aB-CuS"/>
                             <constraint firstItem="S9A-ZJ-QFE" firstAttribute="trailing" secondItem="QXm-wr-azS" secondAttribute="trailing" id="blB-ya-HR1"/>
                             <constraint firstItem="Pcy-WT-Bmn" firstAttribute="leading" secondItem="S9A-ZJ-QFE" secondAttribute="leading" constant="16" id="bxS-mu-ABX"/>
+                            <constraint firstItem="S9A-ZJ-QFE" firstAttribute="trailing" secondItem="wQe-3k-Gu0" secondAttribute="trailing" constant="16" id="jzg-Y0-RpT"/>
                             <constraint firstItem="syL-NA-gzl" firstAttribute="leading" secondItem="S9A-ZJ-QFE" secondAttribute="leading" id="mb0-hK-Sm2"/>
                             <constraint firstItem="QXm-wr-azS" firstAttribute="leading" secondItem="S9A-ZJ-QFE" secondAttribute="leading" id="nb5-7H-sMj"/>
                             <constraint firstItem="syL-NA-gzl" firstAttribute="top" secondItem="QXm-wr-azS" secondAttribute="bottom" id="xO4-1Z-sbu"/>
@@ -91,6 +100,7 @@
                         <outlet property="instructionStackView" destination="Z6V-TT-qox" id="YU7-VV-nV1"/>
                         <outlet property="label" destination="Pcy-WT-Bmn" id="vMz-t5-dyg"/>
                         <outlet property="sceneView" destination="QXm-wr-azS" id="Cjq-Il-rTw"/>
+                        <outlet property="toggle" destination="wQe-3k-Gu0" id="oLT-Fd-eLq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

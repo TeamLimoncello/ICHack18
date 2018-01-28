@@ -7,15 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		47360724201D3EDE00C0B50D /* PTChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4736071B201D3EDD00C0B50D /* PTChannel.m */; };
-		47360725201D3EDE00C0B50D /* PTUSBHub.m in Sources */ = {isa = PBXBuildFile; fileRef = 4736071C201D3EDD00C0B50D /* PTUSBHub.m */; };
-		47360726201D3EDE00C0B50D /* PTProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = 4736071E201D3EDD00C0B50D /* PTProtocol.m */; };
 		47545114201C8FB0008B2CA8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47545113201C8FB0008B2CA8 /* AppDelegate.swift */; };
 		47545116201C8FB0008B2CA8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47545115201C8FB0008B2CA8 /* ViewController.swift */; };
 		47545119201C8FB0008B2CA8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 47545117201C8FB0008B2CA8 /* Main.storyboard */; };
 		4754511B201C8FB0008B2CA8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4754511A201C8FB0008B2CA8 /* Assets.xcassets */; };
 		4754511E201C8FB0008B2CA8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4754511C201C8FB0008B2CA8 /* LaunchScreen.storyboard */; };
 		47C9F6D1201DB0AF00B35A1E /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C9F6D0201DB0AF00B35A1E /* DetailView.swift */; };
+		47C9F6E0201DEA9A00B35A1E /* PTProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = 47C9F6DD201DEA9900B35A1E /* PTProtocol.m */; };
+		47C9F6E1201DEA9A00B35A1E /* PTUSBHub.m in Sources */ = {isa = PBXBuildFile; fileRef = 47C9F6DE201DEA9A00B35A1E /* PTUSBHub.m */; };
+		47C9F6E2201DEA9A00B35A1E /* PTChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = 47C9F6DF201DEA9A00B35A1E /* PTChannel.m */; };
 		47FB60E5201D349300392433 /* PTManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47FB60E4201D349300392433 /* PTManager.swift */; };
 		6933C676201CC5DA003522B3 /* GestureDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6933C675201CC5DA003522B3 /* GestureDelegate.swift */; };
 		6933C69B201D40D6003522B3 /* ComputerVision.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6933C69A201D40D6003522B3 /* ComputerVision.swift */; };
@@ -28,15 +28,6 @@
 
 /* Begin PBXFileReference section */
 		47360716201D3B1A00C0B50D /* AiRGestures-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AiRGestures-Bridging-Header.h"; sourceTree = "<group>"; };
-		4736071B201D3EDD00C0B50D /* PTChannel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PTChannel.m; sourceTree = "<group>"; };
-		4736071C201D3EDD00C0B50D /* PTUSBHub.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PTUSBHub.m; sourceTree = "<group>"; };
-		4736071D201D3EDD00C0B50D /* PTUSBHub.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PTUSBHub.h; sourceTree = "<group>"; };
-		4736071E201D3EDD00C0B50D /* PTProtocol.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PTProtocol.m; sourceTree = "<group>"; };
-		4736071F201D3EDD00C0B50D /* PTPrivate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PTPrivate.h; sourceTree = "<group>"; };
-		47360720201D3EDD00C0B50D /* Peertalk.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Peertalk.h; sourceTree = "<group>"; };
-		47360721201D3EDE00C0B50D /* PTChannel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PTChannel.h; sourceTree = "<group>"; };
-		47360722201D3EDE00C0B50D /* prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = prefix.pch; sourceTree = "<group>"; };
-		47360723201D3EDE00C0B50D /* PTProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PTProtocol.h; sourceTree = "<group>"; };
 		47545110201C8FB0008B2CA8 /* AiRGestures.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AiRGestures.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		47545113201C8FB0008B2CA8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		47545115201C8FB0008B2CA8 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -45,6 +36,16 @@
 		4754511D201C8FB0008B2CA8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4754511F201C8FB0008B2CA8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		47C9F6D0201DB0AF00B35A1E /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
+		47C9F6D6201DEA9800B35A1E /* PTUSBHub.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PTUSBHub.h; sourceTree = "<group>"; };
+		47C9F6D7201DEA9800B35A1E /* prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = prefix.pch; sourceTree = "<group>"; };
+		47C9F6D8201DEA9800B35A1E /* PTPrivate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PTPrivate.h; sourceTree = "<group>"; };
+		47C9F6D9201DEA9800B35A1E /* PTChannel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PTChannel.h; sourceTree = "<group>"; };
+		47C9F6DA201DEA9900B35A1E /* PTProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PTProtocol.h; sourceTree = "<group>"; };
+		47C9F6DB201DEA9900B35A1E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = Assets/Peertalk/Info.plist; sourceTree = "<group>"; };
+		47C9F6DC201DEA9900B35A1E /* Peertalk.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Peertalk.h; sourceTree = "<group>"; };
+		47C9F6DD201DEA9900B35A1E /* PTProtocol.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PTProtocol.m; sourceTree = "<group>"; };
+		47C9F6DE201DEA9A00B35A1E /* PTUSBHub.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PTUSBHub.m; sourceTree = "<group>"; };
+		47C9F6DF201DEA9A00B35A1E /* PTChannel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PTChannel.m; sourceTree = "<group>"; };
 		47FB60E4201D349300392433 /* PTManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PTManager.swift; sourceTree = "<group>"; };
 		6933C675201CC5DA003522B3 /* GestureDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GestureDelegate.swift; sourceTree = "<group>"; };
 		6933C69A201D40D6003522B3 /* ComputerVision.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComputerVision.swift; sourceTree = "<group>"; };
@@ -66,22 +67,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		47360728201D3F0100C0B50D /* Peertalk */ = {
-			isa = PBXGroup;
-			children = (
-				47360720201D3EDD00C0B50D /* Peertalk.h */,
-				47360722201D3EDE00C0B50D /* prefix.pch */,
-				47360721201D3EDE00C0B50D /* PTChannel.h */,
-				4736071B201D3EDD00C0B50D /* PTChannel.m */,
-				4736071F201D3EDD00C0B50D /* PTPrivate.h */,
-				47360723201D3EDE00C0B50D /* PTProtocol.h */,
-				4736071E201D3EDD00C0B50D /* PTProtocol.m */,
-				4736071D201D3EDD00C0B50D /* PTUSBHub.h */,
-				4736071C201D3EDD00C0B50D /* PTUSBHub.m */,
-			);
-			path = Peertalk;
-			sourceTree = "<group>";
-		};
 		47545107201C8FB0008B2CA8 = {
 			isa = PBXGroup;
 			children = (
@@ -103,8 +88,9 @@
 			isa = PBXGroup;
 			children = (
 				47C9F6CF201D765A00B35A1E /* Assets */,
-				47360728201D3F0100C0B50D /* Peertalk */,
 				47545113201C8FB0008B2CA8 /* AppDelegate.swift */,
+				47C9F6DB201DEA9900B35A1E /* Info.plist */,
+				47C9F6E3201DEAA200B35A1E /* Peertalk */,
 				47545115201C8FB0008B2CA8 /* ViewController.swift */,
 				47FB60E4201D349300392433 /* PTManager.swift */,
 				47C9F6D0201DB0AF00B35A1E /* DetailView.swift */,
@@ -122,6 +108,22 @@
 			children = (
 			);
 			path = Assets;
+			sourceTree = "<group>";
+		};
+		47C9F6E3201DEAA200B35A1E /* Peertalk */ = {
+			isa = PBXGroup;
+			children = (
+				47C9F6DC201DEA9900B35A1E /* Peertalk.h */,
+				47C9F6D7201DEA9800B35A1E /* prefix.pch */,
+				47C9F6D9201DEA9800B35A1E /* PTChannel.h */,
+				47C9F6DF201DEA9A00B35A1E /* PTChannel.m */,
+				47C9F6D8201DEA9800B35A1E /* PTPrivate.h */,
+				47C9F6DA201DEA9900B35A1E /* PTProtocol.h */,
+				47C9F6DD201DEA9900B35A1E /* PTProtocol.m */,
+				47C9F6D6201DEA9800B35A1E /* PTUSBHub.h */,
+				47C9F6DE201DEA9A00B35A1E /* PTUSBHub.m */,
+			);
+			path = Peertalk;
 			sourceTree = "<group>";
 		};
 		698D7029201CB87A00182211 /* Gestures */ = {
@@ -216,15 +218,15 @@
 				6933C676201CC5DA003522B3 /* GestureDelegate.swift in Sources */,
 				47C9F6D1201DB0AF00B35A1E /* DetailView.swift in Sources */,
 				47545116201C8FB0008B2CA8 /* ViewController.swift in Sources */,
+				47C9F6E0201DEA9A00B35A1E /* PTProtocol.m in Sources */,
 				6981CA56201D939C0059CBC0 /* GestureModel.mlmodel in Sources */,
 				47545114201C8FB0008B2CA8 /* AppDelegate.swift in Sources */,
-				47360724201D3EDE00C0B50D /* PTChannel.m in Sources */,
 				698D7028201CB7FF00182211 /* Gesture.swift in Sources */,
+				47C9F6E2201DEA9A00B35A1E /* PTChannel.m in Sources */,
+				47C9F6E1201DEA9A00B35A1E /* PTUSBHub.m in Sources */,
 				47FB60E5201D349300392433 /* PTManager.swift in Sources */,
-				47360725201D3EDE00C0B50D /* PTUSBHub.m in Sources */,
 				6981CA50201D82110059CBC0 /* Swipe.swift in Sources */,
 				698D7026201CB67A00182211 /* GestureRecogniser.swift in Sources */,
-				47360726201D3EDE00C0B50D /* PTProtocol.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
