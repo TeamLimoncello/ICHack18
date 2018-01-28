@@ -8,8 +8,7 @@
 
 import Cocoa
 
-@NSApplicationMain
-class AppDelegate: NSObject, NSApplicationDelegate {
+@NSApplicationMain class AppDelegate: NSObject, NSApplicationDelegate {
 
     let statusItem = NSStatusBar.system.statusItem(withLength:NSStatusItem.squareLength)
     let popover = NSPopover()
@@ -18,12 +17,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         setupMenuBarIcon()
         setupEventMonitor()
-        startGestureServiceManager()
+        GSM = GestureServiceManager()
     }
     
     func setupMenuBarIcon() {
         if let button = statusItem.button {
-            button.image = NSImage(named:NSImage.Name("Menu Bar Icon"))
+            let menuBarImage = NSImage(named:NSImage.Name("Menu Bar Icon"))
+            menuBarImage?.isTemplate = true
+            button.image = menuBarImage
             button.action = #selector(togglePopover(_:))
         }
         popover.contentViewController = MenuViewController.freshController()
@@ -35,11 +36,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                 strongSelf.closePopover(sender: event)
             }
         }
-    }
-    
-    func startGestureServiceManager() {
-        let _ = GestureServiceManager()
-        print("Initialized Gesture Service manager")
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {

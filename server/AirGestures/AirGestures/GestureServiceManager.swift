@@ -17,6 +17,31 @@ class GestureServiceManager : NSObject {
         // Setup the PTManager
         ptManager.delegate = self
         ptManager.connect(portNumber: PORT_NUMBER)
+        
+        print("Initialized Gesture Service manager on port \(PORT_NUMBER)")
+    }
+    
+    func click() {
+        if let clickScriptPath = Bundle.main.path(forResource: "click", ofType: "applescript") {
+            do {
+                let clickScriptContents = try String(contentsOfFile: clickScriptPath)
+                print(clickScriptContents)
+                
+                var error: NSDictionary?
+                if let csc = NSAppleScript(source: clickScriptContents) {
+                    let _: NSAppleEventDescriptor = csc.executeAndReturnError(&error)
+                    if (error != nil) {
+                        print("error: \(String(describing: error))")
+                    } else {
+                        print("Executed click script successfully")
+                    }
+                }
+            } catch {
+                print("Contents of applescript could not be loaded")
+            }
+        } else {
+            print("Click script could not be found!")
+        }
     }
 }
 
@@ -26,15 +51,9 @@ extension GestureServiceManager: PTManagerDelegate {
         return true
     }
     
-    func peertalk(didReceiveData data: Data, ofType type: UInt32) {
-        if type == PTType.number.rawValue {
-            let num = data.convert() as! String
-            print("Recieved \(num)")
-        } else if type == PTType.image.rawValue {
-            print("Recieved image, use NSImage(data: data) to convert it into a NSImage.")
-        } else {
-            print("Recieved data of unknown type")
-        }
+    func peertalk(didReceiveData data: Data) {
+        let num = data.convert() as! String
+        print("Recieved \(num)")
     }
     
     func peertalk(didChangeConnection connected: Bool) {
@@ -42,3 +61,5 @@ extension GestureServiceManager: PTManagerDelegate {
         print(connected ? "Connected" : "Disconnected")
     }
 }
+
+var GSM: GestureServiceManager!

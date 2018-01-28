@@ -687,6 +687,51 @@
                     <view key="view" wantsLayer="YES" id="m2S-Jp-Qdl">
                         <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="hPg-cU-q7c">
+                                <rect key="frame" x="165" y="210" width="150" height="28"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="28" id="BhI-b9-RKd"/>
+                                </constraints>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Current Gesture:" id="l1c-eu-WeK">
+                                    <font key="font" metaFont="system" size="19"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="TZH-7P-D6t">
+                                <rect key="frame" x="207" y="13" width="66" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="0YV-oo-KZT"/>
+                                </constraints>
+                                <buttonCell key="cell" type="push" title="Quit" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="zFb-eU-3oX">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="quitClicked:" target="XfG-lQ-9wD" id="LfO-3Z-x9d"/>
+                                </connections>
+                            </button>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ccJ-4q-WpG">
+                                <rect key="frame" x="209" y="98" width="62" height="74"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="74" id="FVd-to-xJc"/>
+                                </constraints>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" placeholderString="👎" id="bcq-Ni-nfB">
+                                    <font key="font" metaFont="system" size="50"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="hPg-cU-q7c" firstAttribute="centerX" secondItem="m2S-Jp-Qdl" secondAttribute="centerX" id="18F-c2-rEF"/>
+                            <constraint firstAttribute="bottom" secondItem="TZH-7P-D6t" secondAttribute="bottom" constant="20" id="3WX-t1-kFS"/>
+                            <constraint firstItem="hPg-cU-q7c" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="32" id="kEZ-iz-exp"/>
+                            <constraint firstItem="ccJ-4q-WpG" firstAttribute="top" secondItem="hPg-cU-q7c" secondAttribute="bottom" constant="38" id="lm4-lw-Nlr"/>
+                            <constraint firstItem="ccJ-4q-WpG" firstAttribute="centerX" secondItem="m2S-Jp-Qdl" secondAttribute="centerX" id="lyx-Ha-lrh"/>
+                            <constraint firstItem="TZH-7P-D6t" firstAttribute="centerX" secondItem="m2S-Jp-Qdl" secondAttribute="centerX" id="oxH-yL-dhN"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>

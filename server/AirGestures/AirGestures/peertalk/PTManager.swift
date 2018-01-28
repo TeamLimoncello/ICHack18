@@ -15,7 +15,7 @@ protocol PTManagerDelegate {
     func peertalk(shouldAcceptDataOfType type: UInt32) -> Bool
     
     /** Runs when the device has received data */
-    func peertalk(didReceiveData data: Data, ofType type: UInt32)
+    func peertalk(didReceiveData data: Data)
     
     /** Runs when the connection has changed */
     func peertalk(didChangeConnection connected: Bool)
@@ -292,7 +292,7 @@ protocol PTManagerDelegate {
                 // Creates the data
                 let dispatchData = payload.dispatchData as DispatchData
                 let data = NSData(contentsOfDispatchData: dispatchData as __DispatchData) as Data
-                delegate?.peertalk(didReceiveData: data, ofType: type)
+                delegate?.peertalk(didReceiveData: data)
             }
             
             // Connection was ended
