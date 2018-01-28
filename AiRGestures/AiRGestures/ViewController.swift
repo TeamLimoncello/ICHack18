@@ -93,23 +93,7 @@ class ViewController: UIViewController {
 
 extension ViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
-//        if vision.requiresRefresh() {
-//            vision.setBackgroundImage(sampleBuffer)
-//        }
-        
-        
         gestureRecogniser.detectGestures(in: sampleBuffer)
-//        let pixelBuffer: CVPixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer)!
-//        let width = CVPixelBufferGetHeight(pixelBuffer)
-//        let height = CVPixelBufferGetWidth(pixelBuffer)
-//
-//        let ciImage = CIImage(cvPixelBuffer: pixelBuffer).oriented(.leftMirrored)
-//        let videoImage = Vision.context.createCGImage(ciImage, from: CGRect(x: 0, y: 0, width: width, height: height))
-//
-//        let result = vision.processPixels(in: UIImage(cgImage: videoImage!))
-//        DispatchQueue.main.sync {
-//            imageView.image = result
-//        }
     }
 }
 
@@ -124,7 +108,7 @@ extension ViewController: GestureDelegate {
         DispatchQueue.main.sync {
             if gesture != previousGesture{
                 emojiView.text = getEmoji(gesture: gesture)
-                PTManager.instance.sendObject(object:gesture.rawValue)
+                PTManager.instance.sendObject(object:"\(gesture),\(layer)")
             }
         }
         if gesture != Gesture.none{
@@ -143,6 +127,8 @@ extension ViewController: GestureDelegate {
             forward = true
         case Gesture.twoFingers:
             forward = false
+        case Gesture.ok:
+            orb.firstMaterial?.emission.contents = UIColor.green
         default:
             layer = true
             forward = true
