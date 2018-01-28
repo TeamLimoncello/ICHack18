@@ -100,6 +100,7 @@
 		47545112201C8FB0008B2CA8 /* AiRGestures */ = {
 			isa = PBXGroup;
 			children = (
+				47C9F6CF201D765A00B35A1E /* Assets */,
 				47360728201D3F0100C0B50D /* Peertalk */,
 				47545113201C8FB0008B2CA8 /* AppDelegate.swift */,
 				47545115201C8FB0008B2CA8 /* ViewController.swift */,
@@ -111,6 +112,13 @@
 				698D7029201CB87A00182211 /* Gestures */,
 			);
 			path = AiRGestures;
+			sourceTree = "<group>";
+		};
+		47C9F6CF201D765A00B35A1E /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Assets;
 			sourceTree = "<group>";
 		};
 		698D7029201CB87A00182211 /* Gestures */ = {
