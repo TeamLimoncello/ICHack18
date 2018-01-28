@@ -723,6 +723,19 @@
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
+                            <button verticalHuggingPriority="750" ambiguous="YES" mirrorLayoutDirectionWhenInternationalizing="always" translatesAutoresizingMaskIntoConstraints="NO" id="NFj-hx-PM6">
+                                <rect key="frame" x="395" y="13" width="77" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="HFs-7C-URe"/>
+                                </constraints>
+                                <buttonCell key="cell" type="push" title="About" bezelStyle="rounded" alignment="center" borderStyle="border" userInterfaceLayoutDirection="rightToLeft" imageScaling="proportionallyDown" inset="2" id="Zff-QR-JLo">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="aboutClicked:" target="XfG-lQ-9wD" id="daU-45-KZ7"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <constraints>
                             <constraint firstItem="hPg-cU-q7c" firstAttribute="centerX" secondItem="m2S-Jp-Qdl" secondAttribute="centerX" id="18F-c2-rEF"/>

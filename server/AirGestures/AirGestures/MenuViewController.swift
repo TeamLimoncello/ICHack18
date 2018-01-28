@@ -13,6 +13,11 @@ class MenuViewController: NSViewController {
     @IBAction func quitClicked(_ sender: Any) {
         NSApplication.shared.terminate(self)
     }
+    @IBAction func aboutClicked(_ sender: Any) {
+        if let url = URL(string: "https://teamlimoncello.github.io/ICHack18/#tech") {
+            NSWorkspace.shared.open(url)
+        }
+    }
 }
 
 extension MenuViewController {
