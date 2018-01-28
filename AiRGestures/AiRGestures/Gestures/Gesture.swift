@@ -22,7 +22,7 @@ func getEmoji(gesture: Gesture) -> String{
     case .ok:
         return "👌"
     case .twoFingers:
-        return "✌️"
+        return "☝️"
     case .fiveFingers:
         return "🖐"
     case .fist:
