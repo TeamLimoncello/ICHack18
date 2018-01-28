@@ -1,14 +1,124 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Gestures by Team Limoncello</title>
+        <meta charset="utf-8">
+        <title>AirGestures by Team Limoncello</title>
         <style>
             body {
-                font-family: sans-serif;
+                font-family: -apple-system, BlinkMacSystemFont, Calibri, sans-serif;
+                margin: 0;
+            }
+
+            header {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                height: 50px;
+                background-color: rgba(64,64,64,0.7);
+                color: white;
+                overflow: hidden;
+            }
+
+            header h6 {
+                position: absolute;
+                left: calc(50vw - 400px);
+                top: 0;
+                margin: 0;
+                font-weight: normal;
+                font-size: 27px;
+                padding: 10px 0;
+            }
+
+            header nav {
+                display: block;
+                position: absolute;
+                right: calc(50vw - 400px);
+                font-size: 18px;
+            }
+
+            header nav a {
+                text-decoration: none;
+                padding: 15px 30px;
+                display: inline-block;
+                text-transform: uppercase;
+                color: inherit;
+            }
+
+            header nav a:hover {
+                background-color: rgba(122,47,87,0.3);
+            }
+
+            header nav a:active {
+                background-color: rgba(122,47,87,0.7);
+            }
+
+            section {
+                padding: calc(50px + (100vh - 50px)/10) 10vw 10vw;
+                box-sizing: border-box;
+                height: 100vh;
+            }
+
+            section.left {
+                padding-right: 60vw;
+            }
+
+            section.right {
+                padding-left: 60vw;
             }
         </style>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/scrollify/1.0.19/jquery.scrollify.js"></script>
+        <script type="text/javascript">
+            $(function () {
+                $.scrollify({
+                    section: "section",
+                    updateHash: false,
+                });
+            });
+            $(document).on('click', 'a[href^="#"]', function (event) {
+                history.pushState(undefined, undefined, $.attr(this, 'href'));
+                event.preventDefault();
+
+                $.scrollify.move($.attr(this, 'href'));
+            });
+        </script>
     </head>
     <body>
-        <h1>Cool stuff to come</h1>
+        <header>
+            <h6>AirGestures</h6>
+            <nav>
+                <a href="#home">Home</a>
+                <a href="#getting-started">Getting Started</a>
+                <a href="#tech">Tech</a>
+            </nav>
+        </header>
+        <main>
+            <section data-section-name="home" class="right">
+                <h1>AirGestures</h1>
+                <p>
+                    AirGestures is the new way to interact with your computer effortlessly, without even needing to touch it.
+                </p>
+                <p>
+                    It’s perfect when
+                </p>
+                <ul>
+                    <li>cooking, to scroll the recipe</li>
+                    <li>lecturing, to keep chalk off their laptops</li>
+                </ul>
+            </section>
+            <section data-section-name="getting-started" class="left">
+                <h1>Getting Started</h1>
+                <p>
+                    Using AirGestures is as simple as installing the app on your Mac and your iPhone, and then connecting them by USB cable. The app icon on Mac will then turn from grey to black, to show it has connected. You can now open a webpage, book or presentation, and then use gestures over your phone to control it.
+                </p>
+            </section>
+            <section data-section-name="tech" class="right">
+                <h1>Our technology</h1>
+                <p>
+                    AirGestures makes use of Microsoft’s <a href="https://customvision.ai">Custom Vision library</a> to identify hand shapes and understand your gestures. These are then fed back to the Mac with <a href="https://github.com/kirankunigiri/peertalk-simple">Kiran Kunigiri’s wrapper</a> for the <a href="https://github.com/rsms/peertalk">PeerTalk library</a>.
+                </p>
+            </section>
+        </main>
     </body>
 </html>
