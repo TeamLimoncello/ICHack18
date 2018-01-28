@@ -90,6 +90,27 @@
                     padding: calc(150px + (100vh - 150px)/10) 10vw 10vw;
                 }
             }
+
+            section > div {
+                background-color: white;
+                padding: 1em;
+                border-radius: 1em;
+            }
+
+            .bgBrendon {
+                background-image: url('brendon.jpeg');
+                background-size: cover;
+            }
+
+            .bgLewis {
+                background-image: url('lewis.jpeg');
+                background-size: cover;
+            }
+
+            .bgLew2 {
+                background-image: url('lew2.jpeg');
+                background-size: cover;
+            }
         </style>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/scrollify/1.0.19/jquery.scrollify.js"></script>
@@ -127,37 +148,43 @@
             </nav>
         </header>
         <main>
-            <section data-section-name="home" class="right">
-                <h1>AirGestures</h1>
-                <p>
-                    AirGestures is the new way to interact with your computer effortlessly, without even needing to touch it.
-                </p>
-                <p>
-                    It’s perfect:
-                </p>
-                <ul>
-                    <li>for elderly computer users with limited fine motor control.</li>
-                    <li>when cooking, to scroll the recipe.</li>
-                    <li>when lecturing, to keep chalk off their laptops.</li>
-                </ul>
-                <p>
-                    In future it could be further expanded into areas such as driving, where drawing the eye away from the road to use digital instruments can be dangerous, so gestures would be perfect.
-                </p>
+            <section data-section-name="home" class="right bgBrendon">
+                <div>
+                    <h1>AirGestures</h1>
+                    <p>
+                        AirGestures is the new way to interact with your computer effortlessly, without even needing to touch it.
+                    </p>
+                    <p>
+                        It’s perfect:
+                    </p>
+                    <ul>
+                        <li>for elderly computer users with limited fine motor control.</li>
+                        <li>when cooking, to scroll the recipe.</li>
+                        <li>when lecturing, to keep chalk off their laptops.</li>
+                    </ul>
+                    <p>
+                        In future it could be further expanded into areas such as driving, where drawing the eye away from the road to use digital instruments can be dangerous, so gestures would be perfect.
+                    </p>
+                </div>
             </section>
-            <section data-section-name="getting-started" class="left">
-                <h1>Getting Started</h1>
-                <p>
-                    Using AirGestures is as simple as installing the app on your Mac and your iPhone, and then connecting them by USB cable. The app icon on Mac will then turn from grey to black, to show it has connected. You can now open a webpage, book or presentation, and then use gestures over your phone to control it.
-                </p>
+            <section data-section-name="getting-started" class="left bgLew2">
+                <div>
+                    <h1>Getting Started</h1>
+                    <p>
+                        Using AirGestures is as simple as installing the app on your Mac and your iPhone, and then connecting them by USB cable. The app icon on Mac will then turn from grey to black, to show it has connected. You can now open a webpage, book or presentation, and then use gestures over your phone to control it.
+                    </p>
+                </div>
             </section>
-            <section data-section-name="tech" class="right">
-                <h1>Our technology</h1>
-                <p>
-                    AirGestures makes use of Microsoft’s <a href="https://customvision.ai">Custom Vision library</a> to identify hand shapes and understand your gestures. These are then fed back to the Mac with <a href="https://github.com/kirankunigiri/peertalk-simple">Kiran Kunigiri’s wrapper</a> for the <a href="https://github.com/rsms/peertalk">PeerTalk library</a>.
-                </p>
-                <p>
-                    App icon: Hand by Jakob Vogel from the Noun Project (CC-BY).
-                </p>
+            <section data-section-name="tech" class="right bgLewis">
+                <div>
+                    <h1>Our technology</h1>
+                    <p>
+                        AirGestures makes use of Microsoft’s <a href="https://customvision.ai">Custom Vision library</a> to identify hand shapes and understand your gestures. These are then fed back to the Mac with <a href="https://github.com/kirankunigiri/peertalk-simple">Kiran Kunigiri’s wrapper</a> for the <a href="https://github.com/rsms/peertalk">PeerTalk library</a>.
+                    </p>
+                    <p>
+                        App icon: Hand by Jakob Vogel from the Noun Project (CC-BY).
+                    </p>
+                </div>
             </section>
         </main>
     </body>
