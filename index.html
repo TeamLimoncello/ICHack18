@@ -24,13 +24,17 @@
                 clear: both;
             }
 
-            header h6 {
+            header > a {
                 margin: 0;
+                margin-left: 1em;
                 float: left;
                 font-weight: normal;
                 font-size: 27px;
                 padding: 10px 0;
                 padding-left: calc(50vw - 400px);
+                color: inherit;
+                text-decoration: none;
+                display: inline-block;
             }
 
             header nav {
@@ -48,47 +52,33 @@
                 color: inherit;
             }
 
-            header nav a:hover {
-                background-color: rgba(122,47,87,0.3);
-            }
-
             header nav a:active {
                 background-color: rgba(122,47,87,0.7);
             }
 
             section {
-                padding: calc(50px + (100vh - 50px)/10) 10vw 10vw;
+                padding: calc(50px + (100vh - 50px)/10) 0 10vw;
                 box-sizing: border-box;
-                min-height: 100vh;
                 background-position: center;
             }
 
-            section.left {
-                padding-right: 60vw;
-            }
-
-            section.right {
-                padding-left: 60vw;
-            }
-
-            @media screen and (max-width: 600px), screen and (max-height: 500px) {
-                section.left {
-                    padding-right: 10vw;
-                }
-
-                section.right {
-                    padding-left: 10vw;
-                }
-            }
-
-            @media screen and (max-width: 470px) {
-                header nav a {
-                    display: block;
-                    margin-left: -100vw;
+            @media not screen, screen and (min-width: 601px) {
+                header nav a:hover {
+                    background-color: rgba(122,47,87,0.3);
                 }
 
                 section {
-                    padding: calc(150px + (100vh - 150px)/10) 10vw 10vw;
+                    min-height: 100vh;
+                }
+
+                section.left > div {
+                    margin-left: 10vw;
+                    margin-right: 50vw;
+                }
+
+                section.right > div {
+                    margin-right: 10vw;
+                    margin-left: 50vw;
                 }
             }
 
@@ -101,55 +91,149 @@
             section.youtube {
                 padding: 0;
                 padding-top: 50px;
-                height: 100vh;
+            }
+
+            @media not screen, screen and (min-width: 601px) {
+                section.youtube {
+                    height: 100vh;
+                }
+            }
+
+            section.youtube > div {
+                display: none;
             }
 
             section.youtube iframe {
-                width: 100%;
-                height: 100%;
+                box-sizing: border-box;
+                width: 100vw;
+                height: 75vw;
+                display: block;
             }
 
-            .bgBrendon {
-                background-image: url('brendon.jpeg');
-                background-size: cover;
+            @media not screen, screen and (min-width: 601px) {
+                section.youtube {
+                    height: 100vh;
+                }
+
+                section.youtube iframe {
+                    height: 100%;
+                }
+            
+                .bg.brendon {
+                    background-image: url('brendon.jpeg');
+                    background-size: cover;
+                }
+
+                .bg.lewis {
+                    background-image: url('lewis.jpeg');
+                    background-size: cover;
+                }
+
+                .bg.lew2 {
+                    background-image: url('lew2.jpeg');
+                    background-size: cover;
+                }
             }
 
-            .bgLewis {
-                background-image: url('lewis.jpeg');
-                background-size: cover;
-            }
+            @media screen and (max-width: 600px) {
+                section:first-child {
+                    padding-top: calc(150px + (100vh - 150px)/10);
+                }
 
-            .bgLew2 {
-                background-image: url('lew2.jpeg');
-                background-size: cover;
+                section {
+                    padding: 0;
+                }
+
+                .bg {
+                    background-image: none !important;
+                }
+
+                .bg::after {
+                    content: '';
+                    width: 100vw;
+                    height: 75vw;
+                    display: block;
+                    background-size: cover;
+                }
+
+                .bg.brendon::after {
+                    background-image: url('brendon.jpeg');
+                }
+
+                .bg.lewis::after {
+                    background-image: url('lewis.jpeg');
+                }
+
+                .bg.lew2::after {
+                    background-image: url('lew2.jpeg');
+                }
+
+                section.youtube > div {
+                    display: block;
+                }
             }
         </style>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/scrollify/1.0.19/jquery.scrollify.js"></script>
         <script type="text/javascript">
+            function headerHeight() {
+                return $('header').height();
+            }
+
             $(function () {
-                $.scrollify({
-                    section: "section",
-                    updateHash: false,
-                    animateAnchor: false,
-                    setHeights: false,
+                let mobile;
+
+                $(document).on('keydown', function (event) {
+                    if      (event.keyCode === 37 || event.keyCode === 38) scrollUp();
+                    else if (event.keyCode === 39 || event.keyCode === 40) scrollDown();
+                    else return;
+                    return false;
                 });
-                $('section.youtube').css({paddingTop: $('header').height()});
 
-                $(window).on('resize', function () {
-                    $('section.youtube').css({paddingTop: $('header').height()});
+                handleResize();
+
+                $(window).on('resize', () => handleResize());
+
+                $(document).on('click', 'a[href^="#"]', function (event) {
+                    history.pushState(undefined, undefined, $.attr(this, 'href'));
+                    event.preventDefault();
+
+                    scrollTo($.attr(this, 'href'));
                 });
-            });
-            $(document).on('click', 'a[href^="#"]', function (event) {
-                history.pushState(undefined, undefined, $.attr(this, 'href'));
-                event.preventDefault();
 
-                $.scrollify.move($.attr(this, 'href'));
-            });
+                function handleResize() {
+                    mobile = $(window).width() < 600;
+                    $('section.youtube').css({paddingTop: headerHeight()});
+                    if (mobile) $('section:first-child').css({paddingTop: headerHeight()});
+                    
+                    else $('section:first-child').css({paddingTop: ''});
+                }
 
-            $(document).on('keydown', function (event) {
-                if      (event.keyCode === 37) $.scrollify.previous();
-                else if (event.keyCode === 39) $.scrollify.next();
+                function scrollTo(element) {
+                    $("html, body").animate({
+                        scrollTop: $(element).offset().top - (mobile ? headerHeight() : 0),
+                    }, 500);
+                }
+
+                function scrollUp() {
+                    scroll(true);
+                }
+                function scrollDown() {
+                    scroll(false);
+                }
+                function scroll(up) {
+                    let sections = $('section').get();
+                    let target;
+                    for (let i = sections.length - 1; i >= 0; i--) {
+                        let offset = $(sections[i]).offset().top;
+                        let scroll = $(window).scrollTop() + (mobile ? headerHeight() : 0);
+                        if (offset < scroll + 10 && scroll < offset + 10) target = up ? i-1 : i+1;
+                        else if (offset < scroll) target = up ? i : i+1;
+                        else continue;
+                        break;
+                    }
+                    if (target == sections.length || target == -1) return;
+                    scrollTo(sections[target]);
+                }
             });
         </script>
         <link rel="icon" type="image/png" href="favicon-16.png" sizes="16x16">  
@@ -159,16 +243,15 @@
     </head>
     <body>
         <header>
-            <h6>AirGestures</h6>
+            <a href="#home">AirGestures</a>
             <nav>
-                <a href="#home">Home</a>
                 <a href="#getting-started">Getting Started</a>
                 <a href="#demo">Demo</a>
                 <a href="#tech">Tech</a>
             </nav>
         </header>
         <main>
-            <section data-section-name="home" class="right bgBrendon">
+            <section id="home" class="right bg brendon">
                 <div>
                     <h1>AirGestures</h1>
                     <p>
@@ -187,7 +270,7 @@
                     </p>
                 </div>
             </section>
-            <section data-section-name="getting-started" class="left bgLew2">
+            <section id="getting-started" class="left bg lew2">
                 <div>
                     <h1>Getting Started</h1>
                     <p>
@@ -195,10 +278,13 @@
                     </p>
                 </div>
             </section>
-            <section data-section-name="demo" class="youtube">
-                <iframe src="https://www.youtube-nocookie.com/embed/Txow2uqXvOM?color=white&autohide=2&keyboard=1&modestbranding=1&rel=0&showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen height="100%" width="100%"></iframe>
+            <section id="demo" class="youtube">
+                <div>
+                    <h1>Demo</h1>
+                </div>
+                <iframe src="https://www.youtube-nocookie.com/embed/Txow2uqXvOM?color=white&autohide=2&keyboard=1&modestbranding=1&rel=0&showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
             </section>
-            <section data-section-name="tech" class="right bgLewis">
+            <section id="tech" class="right bg lewis">
                 <div>
                     <h1>Our technology</h1>
                     <p>
@@ -207,6 +293,16 @@
                     <p>
                         App icon: Hand by Jakob Vogel from the Noun Project (CC-BY).
                     </p>
+                    <h2>Our team</h2>
+                    <p>
+                        Team Limoncello is a group of four Computer Science students from the University of Bristol:
+                    </p>
+                    <ul>
+                        <li><a href="https://www.linkedin.com/in/brendon-warwick-8037b0128/">Brendon Warwick</a></li>
+                        <li><a href="https://www.linkedin.com/in/charlie-harding/">Charlie Harding</a></li>
+                        <li><a href="https://www.linkedin.com/in/jay-lees-0b04345b/">Jay Lees</a></li>
+                        <li><a href="https://www.linkedin.com/in/lewiky/">Lewis Bell</a></li>
+                    </ul>
                 </div>
             </section>
         </main>
